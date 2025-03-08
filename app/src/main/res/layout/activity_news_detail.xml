@@ -212,7 +212,7 @@
                         android:layout_alignParentEnd="true"
                         android:layout_marginEnd="0dp"
                         android:backgroundTint="@color/white"
-                        android:importantForAccessibility="no"
+                        android:contentDescription="@string/save_news"
                         android:src="@drawable/ic_bookmark_border" />
                 </RelativeLayout>
 

@@ -1,7 +1,9 @@
 package com.piwew.jaki.ui
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -38,8 +40,16 @@ class NewsAdapter : ListAdapter<News, NewsAdapter.ListViewHolder>(NewsDiffCallba
                     data.likes.toString(),
                     data.publishedAt
                 )
-                ibShare.contentDescription =
-                    itemView.context.getString(R.string.share_news, data.title)
+                ibShare.contentDescription = itemView.context.getString(R.string.share_news, data.title)
+                ibShare.setOnClickListener {
+                    val context = it.context
+                    val shareIntent = Intent().apply {
+                        action = Intent.ACTION_SEND
+                        putExtra(Intent.EXTRA_TEXT, data.title)
+                        type = "text/plain"
+                    }
+                    context.startActivity(Intent.createChooser(shareIntent, context.getString(R.string.share_news)))
+                }
             }
         }
 

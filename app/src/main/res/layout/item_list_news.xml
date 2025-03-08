@@ -41,7 +41,7 @@
                 android:gravity="center_vertical"
                 android:importantForAccessibility="no"
                 android:text="@string/JSC"
-                card_view:drawableStartCompat="@drawable/ic_circle" />
+                card_view:drawableStartCompat="@drawable/ic_jsc"/>
 
             <TextView
                 android:id="@+id/tv_item_title"

@@ -51,6 +51,8 @@ class NewsDetailActivity : AppCompatActivity() {
                 tvItemContent.movementMethod = LinkMovementMethod.getInstance()
                 tvItemLikes.text = getString(R.string.likes, it.likes.toString())
                 ivItemThumbnail.contentDescription = getString(R.string.thumbnail_label, it.title)
+                ibShare.contentDescription = getString(R.string.share_news, it.title)
+                ibSave.contentDescription = getString(R.string.save_news, it.title)
             }
         }
     }
