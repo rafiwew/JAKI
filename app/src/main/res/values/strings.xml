@@ -2,6 +2,7 @@
     <string name="app_name">JAKI</string>
     <string name="likes">%1$s suka</string>
     <string name="likes_and_date">Disukai oleh %1$s orang, tanggal %2$s</string>
+    <string name="news_date">Tanggal %1$s</string>
     <string name="share_news">Bagikan artikel: %1$s ke media sosial atau aplikasi lainnya</string>
     <string name="save_news">Simpan artikel: %1$s</string>
     <string name="share_newss">Bagikan berita ini ke media sosial atau aplikasi lainnya</string>
@@ -13,4 +14,7 @@
     <string name="copy_link">Salin tautan artikel ini</string>
     <string name="back">Kembali ke halaman sebelumnya</string>
     <string name="thumbnail_label">Gambar dari artikel %1$s</string>
+    <string name="berita_jakarta">Berita Jakarta</string>
+    <string name="informasi_terkini">Informasi Terkini</string>
+    <string name="back_action">Kembali ke halaman sebelumnya</string>
 </resources>

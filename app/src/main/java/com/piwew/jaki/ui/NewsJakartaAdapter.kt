@@ -7,38 +7,24 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.piwew.jaki.R
-import com.piwew.jaki.databinding.ItemListNewsBinding
+import com.piwew.jaki.databinding.ItemListNewsJakartaBinding
 import com.piwew.jaki.model.News
 import com.piwew.jaki.utils.loadImage
 
-class NewsAdapter : ListAdapter<News, NewsAdapter.ListViewHolder>(NewsDiffCallback()) {
+class NewsJakartaAdapter :
+    ListAdapter<News, NewsJakartaAdapter.ListViewHolder>(NewsDiffCallback()) {
 
     var onItemClick: ((News) -> Unit)? = null
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
-        val view = ItemListNewsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return ListViewHolder(view)
-    }
-
-    override fun onBindViewHolder(holder: NewsAdapter.ListViewHolder, position: Int) {
-        val data = getItem(position)
-        holder.bind(data)
-    }
-
-    inner class ListViewHolder(private val binding: ItemListNewsBinding) :
+    inner class ListViewHolder(private val binding: ItemListNewsJakartaBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(data: News) {
             with(binding) {
                 ivThumbnail.loadImage(data.thumbnailUrl)
                 tvItemTitle.text = data.title
-                tvItemLikes.text = itemView.context.getString(R.string.likes, data.likes.toString())
                 tvItemReleaseDate.text = data.publishedAt
-                likesDateSection.contentDescription = itemView.context.getString(
-                    R.string.likes_and_date,
-                    data.likes.toString(),
-                    data.publishedAt
-                )
+                tvItemReleaseDate.contentDescription = itemView.context.getString(R.string.news_date, data.publishedAt)
                 ibShare.contentDescription = itemView.context.getString(R.string.share_news, data.title)
                 ibShare.setOnClickListener {
                     val context = it.context
@@ -47,7 +33,12 @@ class NewsAdapter : ListAdapter<News, NewsAdapter.ListViewHolder>(NewsDiffCallba
                         putExtra(Intent.EXTRA_TEXT, data.title)
                         type = "text/plain"
                     }
-                    context.startActivity(Intent.createChooser(shareIntent, context.getString(R.string.share_news)))
+                    context.startActivity(
+                        Intent.createChooser(
+                            shareIntent,
+                            context.getString(R.string.share_news)
+                        )
+                    )
                 }
             }
         }
@@ -57,7 +48,16 @@ class NewsAdapter : ListAdapter<News, NewsAdapter.ListViewHolder>(NewsDiffCallba
                 onItemClick?.invoke(getItem(adapterPosition))
             }
         }
+    }
 
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
+        val view = ItemListNewsJakartaBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ListViewHolder(view)
+    }
+
+    override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
+        val data = getItem(position)
+        holder.bind(data)
     }
 
     class NewsDiffCallback : DiffUtil.ItemCallback<News>() {
@@ -69,5 +69,4 @@ class NewsAdapter : ListAdapter<News, NewsAdapter.ListViewHolder>(NewsDiffCallba
             return oldItem == newItem
         }
     }
-
 }
