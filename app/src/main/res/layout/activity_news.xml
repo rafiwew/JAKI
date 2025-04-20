@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
@@ -7,34 +8,358 @@
     android:orientation="vertical"
     tools:context=".NewsActivity">
 
-    <Button
-        android:id="@+id/btn_bj"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="@string/berita_jakarta" />
-
-    <Button
-        android:id="@+id/btn_news"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:text="@string/JSC" />
-
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:fontFamily="@font/plus_jakarta_sans_bold"
-        android:paddingHorizontal="16dp"
-        android:text="@string/informasi_terkini"
-        android:textSize="20sp" />
+        android:orientation="vertical">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_news_main"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingHorizontal="16dp"
-        tools:listitem="@layout/item_list_news" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:background="#1354E4"
+            android:orientation="vertical">
 
-</LinearLayout>
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar_news"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:gravity="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/iv_action_back"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginEnd="20dp"
+                    android:contentDescription="@string/back_action"
+                    android:importantForAccessibility="yes"
+                    android:src="@drawable/ic_arrow_back"
+                    app:tint="@color/white" />
+
+                <TextView
+                    android:id="@+id/custom_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:accessibilityHeading="true"
+                    android:fontFamily="@font/plus_jakarta_sans_bold"
+                    android:text="@string/News"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    tools:targetApi="p" />
+            </androidx.appcompat.widget.Toolbar>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="35dp"
+                android:fontFamily="@font/plus_jakarta_sans_bold"
+                android:paddingHorizontal="16dp"
+                android:text="@string/hai_smartcitizen"
+                android:textColor="@color/white"
+                android:textSize="24sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/plus_jakarta_sans"
+                android:paddingStart="16dp"
+                android:paddingEnd="90dp"
+                android:text="@string/subtext_news"
+                android:textColor="@color/white"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+
+        <com.google.android.material.search.SearchBar
+            android:id="@+id/search_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-30dp"
+            android:backgroundTint="@color/white"
+            android:elevation="8dp"
+            android:hint="@string/hint_search"
+            app:elevation="8dp" />
+
+        <com.google.android.material.search.SearchView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_anchor="@id/search_bar" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:accessibilityHeading="true"
+            android:fontFamily="@font/plus_jakarta_sans_bold"
+            android:paddingHorizontal="16dp"
+            android:text="@string/akses_cepat"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            tools:targetApi="p" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="10dp"
+            android:layout_marginTop="16dp"
+            android:orientation="vertical">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_berita_jakarta"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="16dp"
+                android:background="@drawable/rounded_rectangle_shape"
+                android:clickable="true"
+                android:contentDescription="@string/berita_jakarta"
+                android:elevation="4dp"
+                android:focusable="true"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="16dp">
+
+                <ImageView
+                    android:id="@+id/iv_berita_jakarta"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:importantForAccessibility="no"
+                    android:src="@drawable/bj"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:fontFamily="@font/plus_jakarta_sans_bold"
+                    android:importantForAccessibility="no"
+                    android:text="@string/berita_jakarta"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/iv_berita_jakarta"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:importantForAccessibility="no"
+                    android:src="@drawable/icon_right_arrow"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="@color/black" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_majalah_jakita"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/rounded_rectangle_shape"
+                android:clickable="true"
+                android:contentDescription="@string/majalah_jakita"
+                android:elevation="4dp"
+                android:focusable="true"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="16dp">
+
+                <ImageView
+                    android:id="@+id/iv_majalah_jakita"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:importantForAccessibility="no"
+                    android:src="@drawable/jsc"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:fontFamily="@font/plus_jakarta_sans_bold"
+                    android:importantForAccessibility="no"
+                    android:text="@string/majalah_jakita"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/iv_majalah_jakita"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:importantForAccessibility="no"
+                    android:src="@drawable/icon_right_arrow"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="@color/black" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:accessibilityHeading="true"
+            android:fontFamily="@font/plus_jakarta_sans_bold"
+            android:paddingHorizontal="16dp"
+            android:text="@string/informasi_terkini"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            tools:targetApi="p" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_news_main"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="16dp"
+            tools:listitem="@layout/item_list_news" />
+
+        <Button
+            android:id="@+id/btn_view_all"
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="@color/white"
+            android:fontFamily="@font/plus_jakarta_sans_bold"
+            android:text="@string/view_all"
+            android:textAllCaps="false"
+            android:textColor="#032D94"
+            app:cornerRadius="8dp"
+            app:strokeColor="#032D94"
+            app:strokeWidth="2dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
+            android:accessibilityHeading="true"
+            android:fontFamily="@font/plus_jakarta_sans_bold"
+            android:paddingHorizontal="16dp"
+            android:text="@string/title_saved_news"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            tools:targetApi="p" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_saved_news"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="16dp"
+            android:background="@drawable/rounded_rectangle_shape"
+            android:clickable="true"
+            android:contentDescription="@string/saved_news"
+            android:elevation="4dp"
+            android:focusable="true"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="16dp">
+
+            <ImageView
+                android:id="@+id/iv_saved_news"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:importantForAccessibility="no"
+                android:src="@drawable/jsc"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:fontFamily="@font/plus_jakarta_sans_bold"
+                android:importantForAccessibility="no"
+                android:text="@string/saved_news"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/iv_saved_news"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:importantForAccessibility="no"
+                android:src="@drawable/icon_right_arrow"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/black" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
+            android:accessibilityHeading="true"
+            android:fontFamily="@font/plus_jakarta_sans_bold"
+            android:paddingHorizontal="16dp"
+            android:text="@string/title_not_found"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            tools:targetApi="p" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_not_found"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/rounded_rectangle_shape"
+            android:clickable="true"
+            android:contentDescription="@string/not_found"
+            android:elevation="4dp"
+            android:focusable="true"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="16dp">
+
+            <ImageView
+                android:id="@+id/iv_not_found"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:importantForAccessibility="no"
+                android:src="@drawable/jsc"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:fontFamily="@font/plus_jakarta_sans_bold"
+                android:importantForAccessibility="no"
+                android:text="@string/not_found"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/iv_not_found"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:importantForAccessibility="no"
+                android:src="@drawable/icon_right_arrow"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/black" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>

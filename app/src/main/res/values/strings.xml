@@ -17,4 +17,15 @@
     <string name="berita_jakarta">Berita Jakarta</string>
     <string name="informasi_terkini">Informasi Terkini</string>
     <string name="back_action">Kembali ke halaman sebelumnya</string>
+    <string name="majalah_jakita">Majalah JaKita</string>
+    <string name="hai_smartcitizen">Hai, Smartcitizen!</string>
+    <string name="subtext_news">Temukan informasi dan berita resmi Jakarta yang bebas hoaks di sini.</string>
+    <string name="hint_search">Coba cari berita seputar Jakarta</string>
+    <string name="akses_cepat">Akses Cepat Berita yang Kamu Butuhkan</string>
+    <string name="view_all">Lihat Lebih Banyak Informasi Terkini</string>
+    <string name="title_saved_news">Lihat Berita yang Kamu Simpan</string>
+    <string name="title_not_found">Tidak Menemukan yang Kamu Cari?</string>
+    <string name="not_found">Kirim email pertanyaan ke tim JSC</string>
+    <string name="saved_news">Berita Disimpan</string>
+    <string name="News">Berita</string>
 </resources>

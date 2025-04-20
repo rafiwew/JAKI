@@ -2,11 +2,14 @@ package com.piwew.jaki
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.AccessibilityDelegateCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.accessibility.AccessibilityNodeInfoCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -22,35 +25,68 @@ class NewsActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityNewsBinding
     private val newsMainAdapter = NewsAdapter()
-    private lateinit var firebaseDatabase: FirebaseDatabase
-    private lateinit var databaseReference: DatabaseReference
+    private val databaseReference: DatabaseReference by lazy {
+        FirebaseDatabase.getInstance().getReference("News")
+    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+
         binding = ActivityNewsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        setEdgeToEdgeInsets()
+        setupAccessibilityDelegates()
+        setupClickListeners()
+
+        setUpRecyclerView()
+        getNewsData()
+    }
+
+    private fun setEdgeToEdgeInsets() {
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+    }
 
-        // Firebase setup
-        firebaseDatabase = FirebaseDatabase.getInstance()
-        databaseReference = firebaseDatabase.getReference("News")
+    private fun setupAccessibilityDelegates() {
+        listOf(
+            binding.clBeritaJakarta,
+            binding.clMajalahJakita,
+            binding.clNotFound,
+            binding.clSavedNews
+        ).forEach { view ->
+            ViewCompat.setAccessibilityDelegate(view, object : AccessibilityDelegateCompat() {
+                override fun onInitializeAccessibilityNodeInfo(
+                    host: View,
+                    info: AccessibilityNodeInfoCompat
+                ) {
+                    super.onInitializeAccessibilityNodeInfo(host, info)
+                    info.roleDescription = "Button"
+                }
+            })
+        }
+    }
 
-        binding.btnBj.setOnClickListener {
-            startActivity(Intent(this@NewsActivity, BeritaJakartaActivity::class.java))
+    private fun setupClickListeners() {
+        binding.ivActionBack.setOnClickListener { onSupportNavigateUp() }
+
+        binding.clBeritaJakarta.setOnClickListener {
+            startActivity(Intent(this, BeritaJakartaActivity::class.java))
         }
 
-        binding.btnNews.setOnClickListener {
-            startActivity(Intent(this@NewsActivity, InformasiTerkiniActivity::class.java))
+        binding.btnViewAll.setOnClickListener {
+            startActivity(Intent(this, InformasiTerkiniActivity::class.java))
         }
 
-        setUpRecyclerView()
-        getNewsData()
+        // Optional
+        binding.clMajalahJakita.setOnClickListener { }
+        binding.clNotFound.setOnClickListener { }
+        binding.clSavedNews.setOnClickListener { }
     }
 
     private fun getNewsData() {
@@ -59,12 +95,14 @@ class NewsActivity : AppCompatActivity() {
                 val tempNewsList = ArrayList<News>()
                 for (getDataSnapshot in snapshot.children) {
                     val news = getDataSnapshot.getValue(News::class.java)
+
                     if (news != null) {
                         tempNewsList.add(news)
                     } else {
                         showToast("Tidak ada data berita")
                     }
                 }
+
                 newsMainAdapter.submitList(tempNewsList)
             }
 
@@ -75,25 +113,25 @@ class NewsActivity : AppCompatActivity() {
     }
 
     private fun setUpRecyclerView() {
-        val mLayoutManager = LinearLayoutManager(this)
         binding.rvNewsMain.apply {
-            layoutManager = mLayoutManager
-            setHasFixedSize(true)
+            layoutManager = LinearLayoutManager(this@NewsActivity)
             adapter = newsMainAdapter
         }
 
         // Handle news item onClick
         newsMainAdapter.onItemClick = { selectedNews ->
             startActivity(Intent(this, NewsDetailActivity::class.java).apply {
-                putExtra(
-                    EXTRA_DATA,
-                    selectedNews
-                )
+                putExtra(EXTRA_DATA, selectedNews)
             })
         }
     }
 
     private fun showToast(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressedDispatcher.onBackPressed()
+        return true
     }
 }
