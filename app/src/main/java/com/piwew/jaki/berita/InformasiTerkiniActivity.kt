@@ -1,4 +1,4 @@
-package com.piwew.jaki
+package com.piwew.jaki.berita
 
 import android.content.Intent
 import android.os.Bundle
@@ -13,23 +13,24 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import com.piwew.jaki.NewsDetailActivity.Companion.EXTRA_DATA
-import com.piwew.jaki.databinding.ActivityBeritaJakartaBinding
+import com.piwew.jaki.R
+import com.piwew.jaki.berita.NewsDetailActivity.Companion.EXTRA_DATA
+import com.piwew.jaki.databinding.ActivityInformasiTerkiniBinding
 import com.piwew.jaki.model.News
-import com.piwew.jaki.ui.NewsJakartaAdapter
+import com.piwew.jaki.ui.NewsAdapter
 
-class BeritaJakartaActivity : AppCompatActivity() {
+class InformasiTerkiniActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityBeritaJakartaBinding
+    private lateinit var binding: ActivityInformasiTerkiniBinding
     private lateinit var firebaseDatabase: FirebaseDatabase
     private lateinit var databaseReference: DatabaseReference
 
-    private val newsJakartaAdapter = NewsJakartaAdapter()
+    private val newsAdapter = NewsAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        binding = ActivityBeritaJakartaBinding.inflate(layoutInflater)
+        binding = ActivityInformasiTerkiniBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         binding.ivActionBack.setOnClickListener { onSupportNavigateUp() }
@@ -60,7 +61,7 @@ class BeritaJakartaActivity : AppCompatActivity() {
                         showToast("Tidak ada data berita")
                     }
                 }
-                newsJakartaAdapter.submitList(tempNewsList)
+                newsAdapter.submitList(tempNewsList)
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -71,14 +72,14 @@ class BeritaJakartaActivity : AppCompatActivity() {
 
     private fun setUpRecyclerView() {
         val mLayoutManager = LinearLayoutManager(this)
-        binding.rvNewsJakarta.apply {
+        binding.rvNewsInformasiTerkini.apply {
             layoutManager = mLayoutManager
             setHasFixedSize(true)
-            adapter = newsJakartaAdapter
+            adapter = newsAdapter
         }
 
         // Handle news item onClick
-        newsJakartaAdapter.onItemClick = { selectedNews ->
+        newsAdapter.onItemClick = { selectedNews ->
             startActivity(Intent(this, NewsDetailActivity::class.java).apply {
                 putExtra(
                     EXTRA_DATA,

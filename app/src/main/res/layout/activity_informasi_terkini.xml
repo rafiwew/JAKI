@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".InformasiTerkiniActivity">
+    tools:context=".berita.InformasiTerkiniActivity">
 
     <com.google.android.material.divider.MaterialDivider
         android:layout_width="wrap_content"

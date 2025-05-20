@@ -16,10 +16,10 @@
         android:theme="@style/Theme.JAKI"
         tools:targetApi="31">
         <activity
-            android:name=".InformasiTerkiniActivity"
+            android:name=".laporan.LaporanWargaMainActivity"
             android:exported="false" />
         <activity
-            android:name=".NewsActivity"
+            android:name=".HomeActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,10 +28,16 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".BeritaJakartaActivity"
-            android:exported="false"/>
+            android:name=".berita.InformasiTerkiniActivity"
+            android:exported="false" />
         <activity
-            android:name=".NewsDetailActivity"
+            android:name=".berita.NewsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".berita.BeritaJakartaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".berita.NewsDetailActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

@@ -28,4 +28,28 @@
     <string name="not_found">Kirim email pertanyaan ke tim JSC</string>
     <string name="saved_news">Berita Disimpan</string>
     <string name="News">Berita</string>
+    <string name="laporan_warga">Laporan Warga</string>
+    <string name="buat_laporan_foto">Buat Laporan Foto</string>
+    <string name="buat_laporan_video">Buat Laporan Video</string>
+    <string name="title_questions">Mengalami Masalah di Jakarta?\nBuat Laporan Warga Yuk!</string>
+    <string name="eksplor_laporan_warga">Eksplor Laporan Warga</string>
+    <string name="lihat_laporan_warga_lainnya">Lihat laporan warga lainnya</string>
+    <string name="pantau_laporan">Pantau laporan yang kamu buat</string>
+    <string name="ketahui_kondisi_laporan">Ketahui kondisi terbaru laporan yang kamu minati</string>
+    <string name="cari_laporan">Cari laporan</string>
+    <string name="butuh_bantuan_lebih_lanjut">Butuh Bantuan Lebih Lanjut?</string>
+
+    <string name="role_button">Button</string>
+    <string name="desc_tindak_lanjut_laporan">Hanya laporan terkait permasalahan di Jakarta saja yang akan ditindaklanjuti</string>
+    <string name="title_tindak_lanjut_laporan">Tindak Lanjut Laporan</string>
+    <string name="title_sheet">Sudah siap untuk membuat laporanmu?</string>
+    <string name="desc_title_sheet">Baca ini dulu sebelum membuat laporan ya!</string>
+    <string name="title_lokasi_laporan">Lokasi Laporan</string>
+    <string name="desc_lokasi_laporan">Lokasi laporan kamu diambil secara otomatis berdasarkan lokasi yang tersimpan saat pengambilan foto</string>
+    <string name="title_laporan_privat_rahasia">Laporan Privat/Rahasia</string>
+    <string name="desc_laporan_privat">Jenis laporanmu akan otomatis terpilih privat atau rahasia. Tetap pakai jenis laporan ini jika kamu ingin laporanmu tidak terlihat oleh siapapun kecuali dirimu sendiri dan petugas</string>
+    <string name="title_laporan_publik">Laporan Publik</string>
+    <string name="desc_laporan_publik">Ubah jenis laporan menjadi Publik pada laman Tinjau Laporan jika kamu ingin laporanmu terlihat oleh pengguna JAKI lainnya</string>
+    <string name="close_action">Tutup</string>
+    <string name="label_checkbox">Saya mengerti. Jangan tampilkan halaman ini lagi</string>
 </resources>

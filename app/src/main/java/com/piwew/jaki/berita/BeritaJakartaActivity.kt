@@ -1,4 +1,4 @@
-package com.piwew.jaki
+package com.piwew.jaki.berita
 
 import android.content.Intent
 import android.os.Bundle
@@ -13,23 +13,24 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import com.piwew.jaki.NewsDetailActivity.Companion.EXTRA_DATA
-import com.piwew.jaki.databinding.ActivityInformasiTerkiniBinding
+import com.piwew.jaki.R
+import com.piwew.jaki.berita.NewsDetailActivity.Companion.EXTRA_DATA
+import com.piwew.jaki.databinding.ActivityBeritaJakartaBinding
 import com.piwew.jaki.model.News
-import com.piwew.jaki.ui.NewsAdapter
+import com.piwew.jaki.ui.NewsJakartaAdapter
 
-class InformasiTerkiniActivity : AppCompatActivity() {
+class BeritaJakartaActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityInformasiTerkiniBinding
+    private lateinit var binding: ActivityBeritaJakartaBinding
     private lateinit var firebaseDatabase: FirebaseDatabase
     private lateinit var databaseReference: DatabaseReference
 
-    private val newsAdapter = NewsAdapter()
+    private val newsJakartaAdapter = NewsJakartaAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        binding = ActivityInformasiTerkiniBinding.inflate(layoutInflater)
+        binding = ActivityBeritaJakartaBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         binding.ivActionBack.setOnClickListener { onSupportNavigateUp() }
@@ -60,7 +61,7 @@ class InformasiTerkiniActivity : AppCompatActivity() {
                         showToast("Tidak ada data berita")
                     }
                 }
-                newsAdapter.submitList(tempNewsList)
+                newsJakartaAdapter.submitList(tempNewsList)
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -71,14 +72,14 @@ class InformasiTerkiniActivity : AppCompatActivity() {
 
     private fun setUpRecyclerView() {
         val mLayoutManager = LinearLayoutManager(this)
-        binding.rvNewsInformasiTerkini.apply {
+        binding.rvNewsJakarta.apply {
             layoutManager = mLayoutManager
             setHasFixedSize(true)
-            adapter = newsAdapter
+            adapter = newsJakartaAdapter
         }
 
         // Handle news item onClick
-        newsAdapter.onItemClick = { selectedNews ->
+        newsJakartaAdapter.onItemClick = { selectedNews ->
             startActivity(Intent(this, NewsDetailActivity::class.java).apply {
                 putExtra(
                     EXTRA_DATA,

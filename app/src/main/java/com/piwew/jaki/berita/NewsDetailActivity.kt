@@ -1,4 +1,4 @@
-package com.piwew.jaki
+package com.piwew.jaki.berita
 
 import android.content.ClipData
 import android.content.ClipboardManager
@@ -13,9 +13,11 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.piwew.jaki.R
 import com.piwew.jaki.databinding.ActivityNewsDetailBinding
 import com.piwew.jaki.model.News
 import com.piwew.jaki.utils.loadImage
+import com.piwew.jaki.utils.setAsAccessibilityHeading
 
 class NewsDetailActivity : AppCompatActivity() {
 
@@ -46,6 +48,7 @@ class NewsDetailActivity : AppCompatActivity() {
             with(binding) {
                 ivItemThumbnail.loadImage(it.thumbnailUrl)
                 tvItemTitle.text = it.title
+                tvItemTitle.setAsAccessibilityHeading()
                 tvItemPublished.text = it.publishedAt
                 tvItemContent.text = Html.fromHtml(it.content, Html.FROM_HTML_MODE_LEGACY)
                 tvItemContent.movementMethod = LinkMovementMethod.getInstance()

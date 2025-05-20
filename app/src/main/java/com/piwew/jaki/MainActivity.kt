@@ -13,7 +13,8 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import com.piwew.jaki.NewsDetailActivity.Companion.EXTRA_DATA
+import com.piwew.jaki.berita.NewsDetailActivity
+import com.piwew.jaki.berita.NewsDetailActivity.Companion.EXTRA_DATA
 import com.piwew.jaki.databinding.ActivityMainBinding
 import com.piwew.jaki.model.News
 import com.piwew.jaki.ui.NewsAdapter

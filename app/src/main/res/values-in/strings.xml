@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="role_button">Tombol</string>
+    <string name="close_action">Tutup</string>
+    <string name="label_checkbox">Saya mengerti. Jangan tampilkan halaman ini lagi</string>
+</resources>

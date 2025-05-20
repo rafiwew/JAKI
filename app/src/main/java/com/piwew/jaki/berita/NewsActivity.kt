@@ -1,4 +1,4 @@
-package com.piwew.jaki
+package com.piwew.jaki.berita
 
 import android.content.Intent
 import android.os.Bundle
@@ -16,7 +16,8 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import com.piwew.jaki.NewsDetailActivity.Companion.EXTRA_DATA
+import com.piwew.jaki.R
+import com.piwew.jaki.berita.NewsDetailActivity.Companion.EXTRA_DATA
 import com.piwew.jaki.databinding.ActivityNewsBinding
 import com.piwew.jaki.model.News
 import com.piwew.jaki.ui.NewsAdapter
@@ -28,7 +29,6 @@ class NewsActivity : AppCompatActivity() {
     private val databaseReference: DatabaseReference by lazy {
         FirebaseDatabase.getInstance().getReference("News")
     }
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,6 +43,39 @@ class NewsActivity : AppCompatActivity() {
 
         setUpRecyclerView()
         getNewsData()
+
+        with(binding) {
+            searchViewNews.setupWithSearchBar(searchBarNews)
+            searchViewNews.editText.setOnEditorActionListener { _, _, _ ->
+                val query = searchViewNews.text.toString()
+                searchBarNews.setText(query)
+                searchViewNews.hide()
+                false
+            }
+        }
+
+        ViewCompat.setAccessibilityDelegate(
+            binding.searchViewNews.editText,
+            object : AccessibilityDelegateCompat() {
+                override fun onInitializeAccessibilityNodeInfo(
+                    host: View,
+                    info: AccessibilityNodeInfoCompat
+                ) {
+                    super.onInitializeAccessibilityNodeInfo(host, info)
+
+                    info.addAction(
+                        AccessibilityNodeInfoCompat.AccessibilityActionCompat(
+                            AccessibilityNodeInfoCompat.ACTION_CLICK,
+                            "cari berita"
+                        )
+                    )
+
+                    info.contentDescription = "Coba cari berita"
+                    info.className = android.widget.EditText::class.java.name
+                }
+            }
+        )
+
     }
 
     private fun setEdgeToEdgeInsets() {
@@ -66,7 +99,7 @@ class NewsActivity : AppCompatActivity() {
                     info: AccessibilityNodeInfoCompat
                 ) {
                     super.onInitializeAccessibilityNodeInfo(host, info)
-                    info.roleDescription = "Button"
+                    info.roleDescription = getString(R.string.role_button)
                 }
             })
         }
