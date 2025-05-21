@@ -3,4 +3,22 @@
     <string name="role_button">Tombol</string>
     <string name="close_action">Tutup</string>
     <string name="label_checkbox">Saya mengerti. Jangan tampilkan halaman ini lagi</string>
+    <string name="langkah_1">Langkah 1/5</string>
+    <string name="action_capture">Ambil foto</string>
+    <string name="action_gallery">Ambil gambar dari galeri</string>
+    <string name="action_switch_camera">Balik kamera</string>
+    <string name="cd_langkah_2">Langkah 2 dari 5</string>
+    <string name="langkah_2">Langkah 2/5</string>
+    <string name="atur_lokasi_laporan">Atur Lokasi Laporan</string>
+    <string name="lokasi_otomatis">(Terdeteksi otomatis berdasarkan lokasi yang tersimpan saat pengambilan foto)</string>
+    <string name="lokasi_laporan">Lokasi Laporan</string>
+    <string name="gambar_yang_kamu_pilih">Gambar yang kamu pilih</string>
+    <string name="sama_dengan_lokasi_foto">Sama dengan lokasi foto</string>
+    <string name="action_edit">Edit lokasi laporan</string>
+    <string name="atur_lokasi_sendiri">Atur lokasi sendiri</string>
+    <string name="lokasi_not_found">Lokasi tidak ditemukan</string>
+    <string name="detail_alamat_laporan">Detail Alamat Laporan</string>
+    <string name="hint_detail_alamat_laporan">(Nama gedung, patokan, keadaan sekitar, dll.)</string>
+    <string name="next">Selanjutnya</string>
+    <string name="detail_address">Detail Alamat</string>
 </resources>

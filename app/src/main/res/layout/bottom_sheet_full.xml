@@ -211,7 +211,7 @@
         android:textSize="14sp" />
 
     <Button
-        android:id="@+id/btnBuatLaporan"
+        android:id="@+id/btn_buat_laporan"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_gravity="bottom|center_vertical"
