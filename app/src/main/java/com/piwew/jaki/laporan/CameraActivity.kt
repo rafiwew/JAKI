@@ -26,14 +26,15 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.Priority
 import com.piwew.jaki.R
 import com.piwew.jaki.databinding.ActivityCameraBinding
+import com.piwew.jaki.model.LaporanData
 import com.piwew.jaki.utils.createCustomTempFile
 import com.piwew.jaki.utils.getImageUri
 import com.piwew.jaki.utils.setAsAccessibilityHeading
+import com.piwew.jaki.utils.setAsAccessibilityRoleButton
 
 class CameraActivity : AppCompatActivity() {
 
@@ -54,6 +55,8 @@ class CameraActivity : AppCompatActivity() {
 
         setEdgeToEdgeInsets()
 
+        binding.ivActionBack.setOnClickListener { onSupportNavigateUp() }
+        binding.ivActionBack.setAsAccessibilityRoleButton()
         binding.tvTitlePage.setAsAccessibilityHeading()
 
         binding.switchCamera.setOnClickListener {
@@ -62,9 +65,9 @@ class CameraActivity : AppCompatActivity() {
                 else CameraSelector.DEFAULT_BACK_CAMERA
             startCamera()
         }
-        //binding.captureImage.setOnClickListener { takePhoto() }
         binding.captureImage.setOnClickListener { getMyLastLocation() }
         binding.btnGaleri.setOnClickListener { startGallery() }
+        //binding.captureImage.setOnClickListener { takePhoto() }
         //belumdipake -> binding.btnCameryIntent.setOnClickListener { startIntentCamera() }
     }
 
@@ -114,13 +117,15 @@ class CameraActivity : AppCompatActivity() {
             object : ImageCapture.OnImageSavedCallback {
                 override fun onImageSaved(output: ImageCapture.OutputFileResults) {
                     val savedUri = output.savedUri ?: Uri.fromFile(photoFile)
-                    val intent = Intent(this@CameraActivity, AturLokasiLaporanActivity::class.java)
-                    intent.putExtra(EXTRA_CAMERAX_IMAGE, savedUri.toString())
 
-                    currentLocation?.let {
-                        intent.putExtra(EXTRA_LATITUDE, it.latitude)
-                        intent.putExtra(EXTRA_LONGITUDE, it.longitude)
-                    }
+                    val laporanData = LaporanData(
+                        imageUri = savedUri.toString(),
+                        latitude = currentLocation?.latitude,
+                        longitude = currentLocation?.longitude
+                    )
+
+                    val intent = Intent(this@CameraActivity, AturLokasiLaporanActivity::class.java)
+                    intent.putExtra(EXTRA_LAPORAN, laporanData)
 
                     startActivity(intent)
                     finish()
@@ -205,7 +210,12 @@ class CameraActivity : AppCompatActivity() {
         if (uri != null) {
             currentImageUri = uri
             val intent = Intent(this, AturLokasiLaporanActivity::class.java)
-            intent.putExtra(EXTRA_CAMERAX_IMAGE, uri.toString())
+
+            val laporanData = LaporanData(
+                imageUri = uri.toString()
+            )
+
+            intent.putExtra(EXTRA_LAPORAN, laporanData)
             startActivity(intent)
             finish()
         } else {
@@ -225,7 +235,7 @@ class CameraActivity : AppCompatActivity() {
     ) { isSuccess ->
         if (isSuccess && currentImageUri != null) {
             val intent = Intent(this, AturLokasiLaporanActivity::class.java)
-            intent.putExtra(EXTRA_CAMERAX_IMAGE, currentImageUri.toString())
+            intent.putExtra(EXTRA_LAPORAN, currentImageUri.toString())
             startActivity(intent)
             finish()
         } else {
@@ -278,8 +288,6 @@ class CameraActivity : AppCompatActivity() {
 
     companion object {
         private const val TAG = "CameraActivity"
-        const val EXTRA_CAMERAX_IMAGE = "CameraX Image"
-        const val EXTRA_LATITUDE = "EXTRA_LATITUDE"
-        const val EXTRA_LONGITUDE = "EXTRA_LONGITUDE"
+        const val EXTRA_LAPORAN = "DATA"
     }
 }

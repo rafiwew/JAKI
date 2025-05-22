@@ -25,6 +25,15 @@
         android:theme="@style/Theme.JAKI"
         tools:targetApi="31">
         <activity
+            android:name=".laporan.TinjauLaporanActivity"
+            android:exported="false" />
+        <activity
+            android:name=".laporan.PilihKategoriLaporanActivity"
+            android:exported="false" />
+        <activity
+            android:name=".laporan.TulisDetailLaporanActivity"
+            android:exported="false" />
+        <activity
             android:name=".laporan.AturLokasiLaporanActivity"
             android:exported="false" />
         <activity
