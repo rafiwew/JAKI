@@ -2,6 +2,7 @@ package com.piwew.jaki.berita
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.SearchView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -15,32 +16,38 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.piwew.jaki.R
 import com.piwew.jaki.berita.NewsDetailActivity.Companion.EXTRA_DATA
-import com.piwew.jaki.databinding.ActivityBeritaJakartaBinding
+import com.piwew.jaki.databinding.ActivitySearchNewsBinding
 import com.piwew.jaki.model.News
-import com.piwew.jaki.ui.NewsJakartaAdapter
-import com.piwew.jaki.utils.setAsAccessibilityHeading
+import com.piwew.jaki.ui.SearchNewsAdapter
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
-class BeritaJakartaActivity : AppCompatActivity() {
+class SearchNewsActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityBeritaJakartaBinding
+    private lateinit var binding: ActivitySearchNewsBinding
+    private val newsSearchAdapter = SearchNewsAdapter()
     private val databaseReference: DatabaseReference by lazy {
         FirebaseDatabase.getInstance().getReference("News")
     }
+    private val originalNewsList = mutableListOf<News>()
 
-    private val newsJakartaAdapter = NewsJakartaAdapter()
+    private var searchJob: Job? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        binding = ActivityBeritaJakartaBinding.inflate(layoutInflater)
+        binding = ActivitySearchNewsBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        setEdgeToEdgeInsets()
 
+        setEdgeToEdgeInsets()
         binding.ivActionBack.setOnClickListener { onSupportNavigateUp() }
-        binding.tvTitlePage.setAsAccessibilityHeading()
 
         setUpRecyclerView()
         getNewsData()
+        setupSearchView()
     }
 
     private fun getNewsData() {
@@ -49,13 +56,12 @@ class BeritaJakartaActivity : AppCompatActivity() {
                 val tempNewsList = ArrayList<News>()
                 for (getDataSnapshot in snapshot.children) {
                     val news = getDataSnapshot.getValue(News::class.java)
-                    if (news != null) {
-                        tempNewsList.add(news)
-                    } else {
-                        showToast(getString(R.string.no_news_data))
-                    }
+                    news?.let { tempNewsList.add(it) }
                 }
-                newsJakartaAdapter.submitList(tempNewsList)
+
+                originalNewsList.clear()
+                originalNewsList.addAll(tempNewsList)
+                newsSearchAdapter.submitList(tempNewsList)
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -65,17 +71,53 @@ class BeritaJakartaActivity : AppCompatActivity() {
     }
 
     private fun setUpRecyclerView() {
-        val mLayoutManager = LinearLayoutManager(this)
-        binding.rvNewsBeritaJakarta.apply {
-            layoutManager = mLayoutManager
-            setHasFixedSize(true)
-            adapter = newsJakartaAdapter
+        binding.rvSearchNews.apply {
+            layoutManager = LinearLayoutManager(this@SearchNewsActivity)
+            adapter = newsSearchAdapter
         }
 
-        newsJakartaAdapter.onItemClick = { selectedNews ->
+        newsSearchAdapter.onItemClick = { selectedNews ->
             startActivity(Intent(this, NewsDetailActivity::class.java).apply {
                 putExtra(EXTRA_DATA, selectedNews)
             })
+        }
+    }
+
+    private fun setupSearchView() {
+        binding.searchViewNews.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                query?.let { filterNews(it) }
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                newText?.let { filterNews(it) }
+                return true
+            }
+        })
+    }
+
+    private fun filterNews(query: String) {
+        searchJob?.cancel()
+        searchJob = CoroutineScope(Dispatchers.Main).launch {
+            delay(300)
+
+            val filteredList = if (query.isEmpty()) {
+                originalNewsList
+            } else {
+                originalNewsList.filter { news ->
+                    news.title.contains(query, ignoreCase = true) || news.content.contains(
+                        query,
+                        ignoreCase = true
+                    )
+                }
+            }
+
+            newsSearchAdapter.submitList(filteredList)
+
+            if (filteredList.isEmpty() && query.isNotEmpty()) {
+                showToast(getString(R.string.not_found_search_news))
+            }
         }
     }
 

@@ -1,7 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="role_button">Tombol</string>
+
+    <string name="app_name">JAKI</string>
+    <string name="JSC">Unit Pengelola Jakarta Smart City</string>
+
+    <!--Action button icon image-->
+    <string name="back_action">Kembali ke halaman sebelumnya</string>
     <string name="close_action">Tutup</string>
+
+    <!--Custom action label-->
+    <string name="announce_action_read_news">membaca berita</string>
+    <string name="announce_action_saved_news">melihat berita yang kamu simpan</string>
+    <string name="announce_action_send_email">mengirim email</string>
+    <string name="announce_action_see_berita_jakarta">melihat Berita Jakarta</string>
+    <string name="announce_action_unliked">tidak menyukai berita ini</string>
+    <string name="announce_action_liked">menyukai berita ini</string>
+    <string name="announce_action_unbookmarked">tidak menyimpan</string>
+    <string name="announce_action_bookmarked">menyimpan</string>
+    <string name="announce_action_share">membagikan</string>
+    <string name="announce_action_copy">menyalin</string>
+    <string name="announce_action_search_news">mencari berita</string>
+    <string name="announce_action_view_all_news">melihat semua berita</string>
+
+    <!--Toast message-->
+    <string name="no_news_data">Tidak ada data berita yang ditampilkan</string>
+    <string name="not_found_email_app">Tidak ada aplikasi email yang ditemukan</string>
+    <string name="not_found_search_news">Tidak ditemukan berita yang sesuai dengan pencarian</string>
+
+    <!--Halaman Beranda Berita-->
+    <string name="title_news">Berita</string>
+    <string name="hai_smartcitizen">Hai, Smartcitizen!</string>
+    <string name="desc_news">Temukan informasi dan berita resmi Jakarta yang bebas hoaks di sini.</string>
+    <string name="hint_search_news">Coba cari berita resmi Jakarta</string>
+    <string name="title_berita_jakarta">Berita Jakarta</string>
+    <string name="title_akses_cepat">Akses Cepat Berita yang Kamu Butuhkan</string>
+    <string name="title_majalah_jakita">Majalah JaKita</string>
+    <string name="title_informasi_terkini">Informasi Terkini</string>
+    <string name="lihat_lebih_banyak">Lihat Lebih Banyak Informasi Terkini</string>
+    <string name="title_saved_news">Lihat Berita yang Kamu Simpan</string>
+    <string name="berita_disimpan">Berita Disimpan</string>
+    <string name="title_tidak_menemukan">Tidak Menemukan yang Kamu Cari?</string>
+    <string name="cd_kirim_ke_email">Kirim email pertanyaan ke tim JSC smartcity@jakarta.go.id</string>
+    <string name="kirim_ke_email">Kirim email pertanyaan ke tim JSC</string>
+    <string name="email_jsc">smartcity@jakarta.go.id</string>
+
+    <!--Halaman Detail Berita-->
+    <string name="thumbnail_label">Gambar dari artikel %1$s</string>
+    <string name="share">SHARE:</string>
+    <string name="title_share">Bagikan berita ini</string>
+    <string name="share_fb">Bagikan di Facebook</string>
+    <string name="share_twitter">Bagikan di Twitter</string>
+    <string name="share_email">Bagikan ke Email</string>
+    <string name="share_link">Salin tautan berita ini</string>
+    <string name="copy_to_clipboard">Tautan berita disalin ke clipboard!</string>
+    <string name="email_body_template">Baca berita menarik ini: %1$s\n\n%2$s</string>
+
+    <string name="no_likes">Belum ada yang menyukai</string>
+    <string name="you_and_others_liked">Anda dan %d orang menyukai</string>
+    <string name="x_people_liked">%d orang menyukai</string>
+    <string name="liked_state">Disukai</string>
+    <string name="not_liked_state">Tidak disukai</string>
+    <string name="liked_announcement">Anda menyukai berita ini</string>
+    <string name="unliked_announcement">Anda tidak lagi menyukai berita ini</string>
+
+    <string name="save_news">Simpan berita %s</string>
+    <string name="saved_news">Berita %s tersimpan</string>
+    <string name="bookmarked_state">Tersimpan</string>
+    <string name="not_bookmarked_state">Belum tersimpan</string>
+    <string name="bookmarked_announcement">Berita %s telah disimpan</string>
+    <string name="unbookmarked_announcement">Berita %s tidak lagi disimpan</string>
+
+    <!--Halaman Berita Disimpan-->
+    <string name="unbookmarked">Batalkan menyimpan berita %s</string>
+    <string name="no_news_saved">Belum ada berita yang kamu simpan</string>
+
+    <!--Berita-->
+    <string name="likes">%1$s suka</string>
+    <string name="share_news">Bagikan berita: %1$s ke media sosial atau aplikasi lainnya</string>
+    <string name="cd_likes_and_date">Disukai oleh %1$s orang, tanggal %2$s</string>
+    <string name="news_date">Tanggal %1$s</string>
+
+    <!--Fitur Laporan Warga-->
+    <string name="laporan_warga">Laporan Warga</string>
+    <string name="buat_laporan_foto">Buat Laporan Foto</string>
+    <string name="buat_laporan_video">Buat Laporan Video</string>
+    <string name="title_questions">Mengalami Masalah di Jakarta?\nBuat Laporan Warga Yuk!</string>
+    <string name="eksplor_laporan_warga">Eksplor Laporan Warga</string>
+    <string name="lihat_laporan_warga_lainnya">Lihat laporan warga lainnya</string>
+    <string name="pantau_laporan">Pantau laporan yang kamu buat</string>
+    <string name="ketahui_kondisi_laporan">Ketahui kondisi terbaru laporan yang kamu minati</string>
+    <string name="cari_laporan">Cari laporan</string>
+    <string name="butuh_bantuan_lebih_lanjut">Butuh Bantuan Lebih Lanjut?</string>
+    <string name="ambil_foto_laporan">Ambil Foto Laporan</string>
+    <string name="cd_langkah_1">Langkah 1 dari 5</string>
+
+    <string name="desc_tindak_lanjut_laporan">Hanya laporan terkait permasalahan di Jakarta saja yang akan ditindaklanjuti</string>
+    <string name="title_tindak_lanjut_laporan">Tindak Lanjut Laporan</string>
+    <string name="title_sheet">Sudah siap untuk membuat laporanmu?</string>
+    <string name="desc_title_sheet">Baca ini dulu sebelum membuat laporan ya!</string>
+    <string name="title_lokasi_laporan">Lokasi Laporan</string>
+    <string name="desc_lokasi_laporan">Lokasi laporan kamu diambil secara otomatis berdasarkan lokasi yang tersimpan saat pengambilan foto</string>
+    <string name="title_laporan_privat_rahasia">Laporan Privat/Rahasia</string>
+    <string name="desc_laporan_privat">Jenis laporanmu akan otomatis terpilih privat atau rahasia. Tetap pakai jenis laporan ini jika kamu ingin laporanmu tidak terlihat oleh siapapun kecuali dirimu sendiri dan petugas</string>
+    <string name="title_laporan_publik">Laporan Publik</string>
+    <string name="desc_laporan_publik">Ubah jenis laporan menjadi Publik pada laman Tinjau Laporan jika kamu ingin laporanmu terlihat oleh pengguna JAKI lainnya</string>
+
     <string name="label_checkbox">Saya mengerti. Jangan tampilkan halaman ini lagi</string>
     <string name="langkah_1">Langkah 1/5</string>
     <string name="action_capture">Ambil foto</string>
@@ -53,4 +156,21 @@
     <string name="suggestions_text">Saran: %1$s. Ketuk untuk memasukkan saran ini.</string>
     <string name="ganti_foto">Ganti foto laporan kamu</string>
     <string name="text_ganti_foto">Ganti Foto</string>
+    <string name="tampilkan_panduan">Tampilkan Panduan</string>
+
+    <string name="cd_instruksi_panduan_satu">Instruksi pengisian laporan. Ceritakan dengan detail, jelas, dan padat. Kamu bisa tulis deskripsi masalah, waktu kejadian, dan detail lain yang diperlukan.</string>
+    <string name="title_instruksi_panduan_satu">Ceritakan dengan detail, jelas dan padat</string>
+    <string name="desc_instruksi_panduan_satu">Kamu bisa tulis deskripsi masalah, waktu kejadian, dan detail lain yang diperlukan.</string>
+
+    <string name="cd_instruksi_panduan_dua">Instruksi pengisian laporan. Gunakan rekomendasi kata bantuan. Pilih saran rekomendasi pilihan kata yang tersedia di bawah, kata-kata tersebut akan otomatis tersalin di kotak deskripsi.</string>
+    <string name="title_instruksi_panduan_dua">Gunakan rekomendasi kata bantuan</string>
+    <string name="desc_instruksi_panduan_dua">Klik rekomendasi pilihan kata yang tersedia di bawah, kata-kata tersebut akan otomatis tersalin di kotak deskripsi.</string>
+
+    <string name="cd_instruksi_panduan_tiga">Instruksi pengisian laporan. Contoh: Ada jalan berlubang yang membahayakan pengguna jalan. Ukurannya cukup besar dan jadi genangan ketika hujan. Tolong ditindaklanjuti.</string>
+    <string name="title_instruksi_panduan_tiga">Contoh:</string>
+    <string name="desc_instruksi_panduan_tiga">Ada jalan berlubang yang membahayakan pengguna jalan. Ukurannya cukup besar dan jadi genangan ketika hujan. Tolong ditindaklanjuti.</string>
+
+    <string name="switch_to_front_camera">Ganti ke kamera depan. Saat ini kamera belakang aktif.</string>
+    <string name="switch_to_back_camera">Ganti ke kamera belakang. Saat ini kamera depan aktif.</string>
+
 </resources>

@@ -25,22 +25,15 @@
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:layout_gravity="start"
-                android:contentDescription="@string/back"
+                android:clickable="true"
+                android:contentDescription="@string/back_action"
+                android:focusable="true"
                 android:minWidth="@dimen/min_width"
                 android:minHeight="@dimen/min_height"
-                android:padding="10dp"
+                android:padding="12dp"
                 android:src="@drawable/ic_arrow_back"
                 app:tint="@color/black" />
 
-            <TextView
-                android:id="@+id/custom_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/plus_jakarta_sans"
-                android:maxLines="1"
-                android:textColor="@color/black"
-                android:textSize="18sp"
-                android:textStyle="bold" />
         </androidx.appcompat.widget.Toolbar>
 
     </RelativeLayout>
@@ -110,6 +103,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="16dp"
+                    android:contentDescription="@string/title_share"
                     android:fontFamily="@font/plus_jakarta_sans_bold"
                     android:text="@string/share" />
 
@@ -161,7 +155,7 @@
                         android:layout_height="48dp"
                         android:layout_marginHorizontal="4dp"
                         android:backgroundTint="@color/white"
-                        android:contentDescription="@string/copy_link"
+                        android:contentDescription="@string/share_link"
                         android:minWidth="@dimen/min_width"
                         android:minHeight="@dimen/min_height"
                         android:padding="8dp"
@@ -211,9 +205,11 @@
                         android:layout_height="48dp"
                         android:layout_alignParentEnd="true"
                         android:layout_marginEnd="0dp"
+                        android:accessibilityLiveRegion="polite"
                         android:backgroundTint="@color/white"
                         android:contentDescription="@string/save_news"
-                        android:src="@drawable/ic_bookmark_border" />
+                        android:importantForAccessibility="yes"
+                        android:src="@drawable/ic_bookmark_selector" />
                 </RelativeLayout>
 
             </LinearLayout>
@@ -221,6 +217,5 @@
         </RelativeLayout>
 
     </ScrollView>
-
 
 </LinearLayout>

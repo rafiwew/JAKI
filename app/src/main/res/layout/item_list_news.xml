@@ -37,11 +37,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:drawablePadding="8dp"
-                android:fontFamily="@font/plus_jakarta_sans"
+                android:fontFamily="@font/plus_jakarta_sans_semibold"
                 android:gravity="center_vertical"
                 android:importantForAccessibility="no"
                 android:text="@string/JSC"
-                card_view:drawableStartCompat="@drawable/ic_jsc"/>
+                card_view:drawableStartCompat="@drawable/ic_jsc" />
 
             <TextView
                 android:id="@+id/tv_item_title"
@@ -51,6 +51,7 @@
                 android:fontFamily="@font/plus_jakarta_sans_bold"
                 android:textAppearance="?attr/textAppearanceTitleMedium"
                 android:textColor="@color/black"
+                android:textSize="16sp"
                 tools:text="Toy Story 4" />
 
             <LinearLayout
@@ -58,7 +59,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:contentDescription="@string/likes_and_date"
+                android:contentDescription="@string/cd_likes_and_date"
                 android:orientation="horizontal">
 
                 <TextView
@@ -101,7 +102,7 @@
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:layout_gravity="end"
-                android:layout_marginTop="-40dp"
+                android:layout_marginTop="-35dp"
                 android:layout_marginEnd="4dp"
                 android:backgroundTint="@color/white"
                 android:contentDescription="@string/share_news"

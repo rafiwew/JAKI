@@ -6,15 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".berita.InformasiTerkiniActivity">
-
-    <com.google.android.material.divider.MaterialDivider
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@id/rv_news_informasi_terkini"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar" />
+    tools:context=".berita.BeritaTersimpanActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -30,7 +22,7 @@
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_marginEnd="20dp"
-            android:accessibilityTraversalAfter="@id/rv_news_informasi_terkini"
+            android:accessibilityTraversalAfter="@id/rv_saved_news"
             android:clickable="true"
             android:contentDescription="@string/back_action"
             android:focusable="true"
@@ -43,24 +35,39 @@
             android:id="@+id/tv_title_page"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:accessibilityTraversalBefore="@id/rv_news_informasi_terkini"
+            android:accessibilityTraversalBefore="@id/rv_saved_news"
             android:fontFamily="@font/plus_jakarta_sans_bold"
-            android:text="@string/title_informasi_terkini"
+            android:text="@string/berita_disimpan"
             android:textColor="@color/black"
             android:textSize="18sp"
             android:textStyle="bold" />
     </androidx.appcompat.widget.Toolbar>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_news_informasi_terkini"
+        android:id="@+id/rv_saved_news"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:accessibilityTraversalAfter="@id/tv_title_page"
         android:paddingHorizontal="16dp"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar"
-        tools:listitem="@layout/item_list_news" />
+        tools:listitem="@layout/item_list_saved_news"
+        tools:visibility="visible" />
+
+    <TextView
+        android:id="@+id/tv_no_news_saved"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/plus_jakarta_sans_medium"
+        android:gravity="center"
+        android:text="@string/no_news_saved"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

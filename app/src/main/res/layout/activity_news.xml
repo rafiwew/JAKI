@@ -8,12 +8,6 @@
     android:orientation="vertical"
     tools:context=".berita.NewsActivity">
 
-    <com.google.android.material.search.SearchView
-        android:id="@+id/search_view_news"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_anchor="@id/search_bar_news" />
-
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -29,7 +23,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="250dp"
+                android:layout_height="230dp"
                 android:background="#1354E4"
                 android:orientation="vertical">
 
@@ -44,33 +38,36 @@
 
                     <ImageView
                         android:id="@+id/iv_action_back"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
                         android:layout_marginEnd="20dp"
+                        android:accessibilityTraversalAfter="@id/tv_title_page"
+                        android:clickable="true"
                         android:contentDescription="@string/back_action"
+                        android:focusable="true"
                         android:importantForAccessibility="yes"
+                        android:padding="12dp"
                         android:src="@drawable/ic_arrow_back"
                         app:tint="@color/white" />
 
                     <TextView
-                        android:id="@+id/custom_title"
+                        android:id="@+id/tv_title_page"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:accessibilityHeading="true"
                         android:fontFamily="@font/plus_jakarta_sans_bold"
-                        android:text="@string/News"
+                        android:text="@string/title_news"
                         android:textColor="@color/white"
                         android:textSize="18sp"
-                        android:textStyle="bold"
-                        tools:targetApi="p" />
+                        android:textStyle="bold" />
                 </androidx.appcompat.widget.Toolbar>
 
                 <TextView
+                    android:id="@+id/tv_hai"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="35dp"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginTop="20dp"
                     android:fontFamily="@font/plus_jakarta_sans_bold"
-                    android:paddingHorizontal="16dp"
                     android:text="@string/hai_smartcitizen"
                     android:textColor="@color/white"
                     android:textSize="24sp" />
@@ -78,37 +75,56 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
                     android:layout_marginTop="10dp"
+                    android:layout_marginEnd="100dp"
                     android:fontFamily="@font/plus_jakarta_sans"
-                    android:paddingStart="16dp"
-                    android:paddingEnd="90dp"
-                    android:text="@string/subtext_news"
+                    android:text="@string/desc_news"
                     android:textColor="@color/white"
                     android:textSize="14sp" />
-
             </LinearLayout>
 
-            <com.google.android.material.search.SearchBar
+            <RelativeLayout
                 android:id="@+id/search_bar_news"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="-30dp"
-                android:backgroundTint="@color/white"
-                android:elevation="8dp"
-                android:hint="@string/hint_search"
-                app:elevation="8dp" />
+                android:background="@drawable/rounded_rectangle_shape_full"
+                android:clickable="true"
+                android:elevation="2dp"
+                android:focusable="true"
+                android:padding="16dp">
+
+                <ImageView
+                    android:id="@+id/iv_search"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:importantForAccessibility="no"
+                    android:src="@drawable/ic_search"
+                    app:tint="@color/black" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_toEndOf="@id/iv_search"
+                    android:fontFamily="@font/plus_jakarta_sans_medium"
+                    android:text="@string/hint_search_news"
+                    android:textSize="14sp" />
+            </RelativeLayout>
 
             <TextView
+                android:id="@+id/tv_akses_cepat_berita"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:accessibilityHeading="true"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="20dp"
                 android:fontFamily="@font/plus_jakarta_sans_bold"
-                android:paddingHorizontal="16dp"
-                android:text="@string/akses_cepat"
+                android:text="@string/title_akses_cepat"
                 android:textColor="@color/black"
-                android:textSize="16sp"
-                tools:targetApi="p" />
+                android:textSize="16sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -124,8 +140,8 @@
                     android:layout_marginHorizontal="16dp"
                     android:background="@drawable/rounded_rectangle_shape"
                     android:clickable="true"
-                    android:contentDescription="@string/berita_jakarta"
-                    android:elevation="4dp"
+                    android:contentDescription="@string/title_berita_jakarta"
+                    android:elevation="2dp"
                     android:focusable="true"
                     android:paddingHorizontal="16dp"
                     android:paddingVertical="16dp">
@@ -146,7 +162,7 @@
                         android:layout_marginStart="16dp"
                         android:fontFamily="@font/plus_jakarta_sans_bold"
                         android:importantForAccessibility="no"
-                        android:text="@string/berita_jakarta"
+                        android:text="@string/title_berita_jakarta"
                         android:textColor="@color/black"
                         android:textSize="16sp"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -173,8 +189,8 @@
                     android:layout_marginBottom="10dp"
                     android:background="@drawable/rounded_rectangle_shape"
                     android:clickable="true"
-                    android:contentDescription="@string/majalah_jakita"
-                    android:elevation="4dp"
+                    android:contentDescription="@string/title_majalah_jakita"
+                    android:elevation="2dp"
                     android:focusable="true"
                     android:paddingHorizontal="16dp"
                     android:paddingVertical="16dp">
@@ -195,7 +211,7 @@
                         android:layout_marginStart="16dp"
                         android:fontFamily="@font/plus_jakarta_sans_bold"
                         android:importantForAccessibility="no"
-                        android:text="@string/majalah_jakita"
+                        android:text="@string/title_majalah_jakita"
                         android:textColor="@color/black"
                         android:textSize="16sp"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -216,15 +232,14 @@
             </LinearLayout>
 
             <TextView
+                android:id="@+id/tv_informasi_terkini"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:accessibilityHeading="true"
+                android:layout_marginHorizontal="16dp"
                 android:fontFamily="@font/plus_jakarta_sans_bold"
-                android:paddingHorizontal="16dp"
-                android:text="@string/informasi_terkini"
+                android:text="@string/title_informasi_terkini"
                 android:textColor="@color/black"
-                android:textSize="16sp"
-                tools:targetApi="p" />
+                android:textSize="16sp" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_news_main"
@@ -240,8 +255,10 @@
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="10dp"
                 android:backgroundTint="@color/white"
+                android:clickable="true"
+                android:focusable="true"
                 android:fontFamily="@font/plus_jakarta_sans_bold"
-                android:text="@string/view_all"
+                android:text="@string/lihat_lebih_banyak"
                 android:textAllCaps="false"
                 android:textColor="#032D94"
                 app:cornerRadius="8dp"
@@ -249,17 +266,16 @@
                 app:strokeWidth="2dp" />
 
             <TextView
+                android:id="@+id/tv_berita_disimpan"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="10dp"
-                android:accessibilityHeading="true"
                 android:fontFamily="@font/plus_jakarta_sans_bold"
-                android:paddingHorizontal="16dp"
                 android:text="@string/title_saved_news"
                 android:textColor="@color/black"
-                android:textSize="16sp"
-                tools:targetApi="p" />
+                android:textSize="16sp" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/cl_saved_news"
@@ -268,8 +284,8 @@
                 android:layout_marginHorizontal="16dp"
                 android:background="@drawable/rounded_rectangle_shape"
                 android:clickable="true"
-                android:contentDescription="@string/saved_news"
-                android:elevation="4dp"
+                android:contentDescription="@string/berita_disimpan"
+                android:elevation="2dp"
                 android:focusable="true"
                 android:paddingHorizontal="16dp"
                 android:paddingVertical="16dp">
@@ -290,7 +306,7 @@
                     android:layout_marginStart="16dp"
                     android:fontFamily="@font/plus_jakarta_sans_bold"
                     android:importantForAccessibility="no"
-                    android:text="@string/saved_news"
+                    android:text="@string/berita_disimpan"
                     android:textColor="@color/black"
                     android:textSize="14sp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -309,17 +325,16 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <TextView
+                android:id="@+id/tv_tidak_menemukan"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="10dp"
-                android:accessibilityHeading="true"
                 android:fontFamily="@font/plus_jakarta_sans_bold"
-                android:paddingHorizontal="16dp"
-                android:text="@string/title_not_found"
+                android:text="@string/title_tidak_menemukan"
                 android:textColor="@color/black"
-                android:textSize="16sp"
-                tools:targetApi="p" />
+                android:textSize="16sp" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/cl_not_found"
@@ -329,8 +344,8 @@
                 android:layout_marginBottom="16dp"
                 android:background="@drawable/rounded_rectangle_shape"
                 android:clickable="true"
-                android:contentDescription="@string/not_found"
-                android:elevation="4dp"
+                android:contentDescription="@string/cd_kirim_ke_email"
+                android:elevation="2dp"
                 android:focusable="true"
                 android:paddingHorizontal="16dp"
                 android:paddingVertical="16dp">
@@ -346,17 +361,30 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
+                    android:id="@+id/tv_kirim_email"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:fontFamily="@font/plus_jakarta_sans_bold"
                     android:importantForAccessibility="no"
-                    android:text="@string/not_found"
+                    android:text="@string/kirim_ke_email"
                     android:textColor="@color/black"
                     android:textSize="14sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@id/iv_not_found"
                     app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_email_jsc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:autoLink="email"
+                    android:fontFamily="@font/plus_jakarta_sans_bold"
+                    android:importantForAccessibility="yes"
+                    android:text="@string/email_jsc"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toEndOf="@id/iv_not_found"
+                    app:layout_constraintTop_toBottomOf="@id/tv_kirim_email" />
 
                 <ImageView
                     android:layout_width="wrap_content"

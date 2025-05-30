@@ -18,12 +18,14 @@ import com.piwew.jaki.berita.NewsDetailActivity.Companion.EXTRA_DATA
 import com.piwew.jaki.databinding.ActivityInformasiTerkiniBinding
 import com.piwew.jaki.model.News
 import com.piwew.jaki.ui.NewsAdapter
+import com.piwew.jaki.utils.setAsAccessibilityHeading
 
 class InformasiTerkiniActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityInformasiTerkiniBinding
-    private lateinit var firebaseDatabase: FirebaseDatabase
-    private lateinit var databaseReference: DatabaseReference
+    private val databaseReference: DatabaseReference by lazy {
+        FirebaseDatabase.getInstance().getReference("News")
+    }
 
     private val newsAdapter = NewsAdapter()
 
@@ -32,18 +34,10 @@ class InformasiTerkiniActivity : AppCompatActivity() {
         enableEdgeToEdge()
         binding = ActivityInformasiTerkiniBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        setEdgeToEdgeInsets()
 
         binding.ivActionBack.setOnClickListener { onSupportNavigateUp() }
-
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
-
-        // Firebase setup
-        firebaseDatabase = FirebaseDatabase.getInstance()
-        databaseReference = firebaseDatabase.getReference("News")
+        binding.tvTitlePage.setAsAccessibilityHeading()
 
         setUpRecyclerView()
         getNewsData()
@@ -58,7 +52,7 @@ class InformasiTerkiniActivity : AppCompatActivity() {
                     if (news != null) {
                         tempNewsList.add(news)
                     } else {
-                        showToast("Tidak ada data berita")
+                        showToast(getString(R.string.no_news_data))
                     }
                 }
                 newsAdapter.submitList(tempNewsList)
@@ -78,14 +72,18 @@ class InformasiTerkiniActivity : AppCompatActivity() {
             adapter = newsAdapter
         }
 
-        // Handle news item onClick
         newsAdapter.onItemClick = { selectedNews ->
             startActivity(Intent(this, NewsDetailActivity::class.java).apply {
-                putExtra(
-                    EXTRA_DATA,
-                    selectedNews
-                )
+                putExtra(EXTRA_DATA, selectedNews)
             })
+        }
+    }
+
+    private fun setEdgeToEdgeInsets() {
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            insets
         }
     }
 
@@ -97,4 +95,5 @@ class InformasiTerkiniActivity : AppCompatActivity() {
         onBackPressedDispatcher.onBackPressed()
         return true
     }
+
 }

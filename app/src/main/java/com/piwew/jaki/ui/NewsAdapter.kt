@@ -2,7 +2,9 @@ package com.piwew.jaki.ui
 
 import android.content.Intent
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.view.accessibility.AccessibilityNodeInfo
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -35,7 +37,7 @@ class NewsAdapter : ListAdapter<News, NewsAdapter.ListViewHolder>(NewsDiffCallba
                 tvItemLikes.text = itemView.context.getString(R.string.likes, data.likes.toString())
                 tvItemReleaseDate.text = data.publishedAt
                 likesDateSection.contentDescription = itemView.context.getString(
-                    R.string.likes_and_date,
+                    R.string.cd_likes_and_date,
                     data.likes.toString(),
                     data.publishedAt
                 )
@@ -48,6 +50,19 @@ class NewsAdapter : ListAdapter<News, NewsAdapter.ListViewHolder>(NewsDiffCallba
                         type = "text/plain"
                     }
                     context.startActivity(Intent.createChooser(shareIntent, context.getString(R.string.share_news)))
+                }
+                itemView.accessibilityDelegate = object : View.AccessibilityDelegate() {
+                    override fun onInitializeAccessibilityNodeInfo(
+                        host: View,
+                        info: AccessibilityNodeInfo
+                    ) {
+                        super.onInitializeAccessibilityNodeInfo(host, info)
+                        val customClick = AccessibilityNodeInfo.AccessibilityAction(
+                            AccessibilityNodeInfo.ACTION_CLICK,
+                            itemView.context.getString(R.string.announce_action_read_news)
+                        )
+                        info.addAction(customClick)
+                    }
                 }
             }
         }

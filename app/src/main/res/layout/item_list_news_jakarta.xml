@@ -31,23 +31,26 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="18dp">
+            android:paddingHorizontal="18dp"
+            android:paddingVertical="8dp">
 
             <TextView
                 android:id="@+id/tv_item_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="50dp"
                 android:fontFamily="@font/plus_jakarta_sans_bold"
+                android:lineSpacingExtra="100dp"
                 android:textAppearance="?attr/textAppearanceTitleMedium"
                 android:textColor="@color/black"
-                tools:text="Toy Story 4" />
+                tools:text="Dinas PPKUKM Tekankan Kegiatan Tera untuk Lindungi Kepentingan Masyarakat" />
 
             <TextView
                 android:id="@+id/tv_item_release_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="8dp"
                 android:contentDescription="@string/news_date"
                 android:fontFamily="@font/plus_jakarta_sans_medium"
                 android:textAppearance="?attr/textAppearanceTitleMedium"

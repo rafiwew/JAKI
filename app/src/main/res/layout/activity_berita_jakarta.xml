@@ -18,11 +18,15 @@
 
         <ImageView
             android:id="@+id/iv_action_back"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:layout_marginEnd="20dp"
+            android:accessibilityTraversalAfter="@id/rv_news_berita_jakarta"
+            android:clickable="true"
             android:contentDescription="@string/back_action"
+            android:focusable="true"
             android:importantForAccessibility="yes"
+            android:padding="12dp"
             android:src="@drawable/ic_arrow_back"
             app:tint="@color/black" />
 
@@ -34,23 +38,23 @@
             android:src="@drawable/bj" />
 
         <TextView
-            android:id="@+id/custom_title"
+            android:id="@+id/tv_title_page"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:accessibilityHeading="true"
+            android:accessibilityTraversalBefore="@id/rv_news_berita_jakarta"
             android:fontFamily="@font/plus_jakarta_sans_bold"
-            android:text="@string/berita_jakarta"
+            android:text="@string/title_berita_jakarta"
             android:textColor="@color/black"
             android:textSize="18sp"
-            android:textStyle="bold"
-            tools:targetApi="p" />
+            android:textStyle="bold" />
 
     </androidx.appcompat.widget.Toolbar>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_news_jakarta"
+        android:id="@+id/rv_news_berita_jakarta"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:accessibilityTraversalAfter="@id/tv_title_page"
         android:paddingHorizontal="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

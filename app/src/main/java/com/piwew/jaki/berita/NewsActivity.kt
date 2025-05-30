@@ -1,15 +1,14 @@
 package com.piwew.jaki.berita
 
+import android.content.ActivityNotFoundException
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
-import android.view.View
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.AccessibilityDelegateCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.core.view.accessibility.AccessibilityNodeInfoCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -21,6 +20,9 @@ import com.piwew.jaki.berita.NewsDetailActivity.Companion.EXTRA_DATA
 import com.piwew.jaki.databinding.ActivityNewsBinding
 import com.piwew.jaki.model.News
 import com.piwew.jaki.ui.NewsAdapter
+import com.piwew.jaki.utils.setAccessibilityAsButton
+import com.piwew.jaki.utils.setAsAccessibilityHeading
+import com.piwew.jaki.utils.setAsAccessibilityRoleButton
 
 class NewsActivity : AppCompatActivity() {
 
@@ -33,7 +35,6 @@ class NewsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-
         binding = ActivityNewsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -43,70 +44,44 @@ class NewsActivity : AppCompatActivity() {
 
         setUpRecyclerView()
         getNewsData()
-
-        with(binding) {
-            searchViewNews.setupWithSearchBar(searchBarNews)
-            searchViewNews.editText.setOnEditorActionListener { _, _, _ ->
-                val query = searchViewNews.text.toString()
-                searchBarNews.setText(query)
-                searchViewNews.hide()
-                false
-            }
-        }
-
-        ViewCompat.setAccessibilityDelegate(
-            binding.searchViewNews.editText,
-            object : AccessibilityDelegateCompat() {
-                override fun onInitializeAccessibilityNodeInfo(
-                    host: View,
-                    info: AccessibilityNodeInfoCompat
-                ) {
-                    super.onInitializeAccessibilityNodeInfo(host, info)
-
-                    info.addAction(
-                        AccessibilityNodeInfoCompat.AccessibilityActionCompat(
-                            AccessibilityNodeInfoCompat.ACTION_CLICK,
-                            "cari berita"
-                        )
-                    )
-
-                    info.contentDescription = "Coba cari berita"
-                    info.className = android.widget.EditText::class.java.name
-                }
-            }
-        )
-
-    }
-
-    private fun setEdgeToEdgeInsets() {
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
     }
 
     private fun setupAccessibilityDelegates() {
         listOf(
+            binding.ivActionBack,
             binding.clBeritaJakarta,
             binding.clMajalahJakita,
             binding.clNotFound,
             binding.clSavedNews
         ).forEach { view ->
-            ViewCompat.setAccessibilityDelegate(view, object : AccessibilityDelegateCompat() {
-                override fun onInitializeAccessibilityNodeInfo(
-                    host: View,
-                    info: AccessibilityNodeInfoCompat
-                ) {
-                    super.onInitializeAccessibilityNodeInfo(host, info)
-                    info.roleDescription = getString(R.string.role_button)
-                }
-            })
+            view.setAsAccessibilityRoleButton()
         }
+
+        listOf(
+            binding.tvTitlePage,
+            binding.tvAksesCepatBerita,
+            binding.tvInformasiTerkini,
+            binding.tvBeritaDisimpan,
+            binding.tvTidakMenemukan
+        ).forEach { view ->
+            view.setAsAccessibilityHeading()
+        }
+
+        binding.clBeritaJakarta.setAccessibilityAsButton(getString(R.string.announce_action_see_berita_jakarta))
+        binding.searchBarNews.setAccessibilityAsButton(getString(R.string.announce_action_search_news))
+        binding.btnViewAll.setAccessibilityAsButton(getString(R.string.announce_action_view_all_news))
+        binding.clSavedNews.setAccessibilityAsButton(getString(R.string.announce_action_saved_news))
+        binding.clNotFound.setAccessibilityAsButton(getString(R.string.announce_action_send_email))
+
     }
 
     private fun setupClickListeners() {
         binding.ivActionBack.setOnClickListener { onSupportNavigateUp() }
+
+        binding.searchBarNews.setOnClickListener {
+            val intent = Intent(this, SearchNewsActivity::class.java)
+            startActivity(intent)
+        }
 
         binding.clBeritaJakarta.setOnClickListener {
             startActivity(Intent(this, BeritaJakartaActivity::class.java))
@@ -116,10 +91,25 @@ class NewsActivity : AppCompatActivity() {
             startActivity(Intent(this, InformasiTerkiniActivity::class.java))
         }
 
-        // Optional
         binding.clMajalahJakita.setOnClickListener { }
-        binding.clNotFound.setOnClickListener { }
-        binding.clSavedNews.setOnClickListener { }
+
+        binding.clSavedNews.setOnClickListener {
+            val intent = Intent(this, BeritaTersimpanActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.clNotFound.setOnClickListener {
+            val email = binding.tvEmailJsc.text.toString()
+            val intent = Intent(Intent.ACTION_SENDTO).apply {
+                data = Uri.parse("mailto:")
+                putExtra(Intent.EXTRA_EMAIL, arrayOf(email))
+            }
+            try {
+                startActivity(intent)
+            } catch (e: ActivityNotFoundException) {
+                showToast(getString(R.string.not_found_email_app))
+            }
+        }
     }
 
     private fun getNewsData() {
@@ -132,7 +122,7 @@ class NewsActivity : AppCompatActivity() {
                     if (news != null) {
                         tempNewsList.add(news)
                     } else {
-                        showToast("Tidak ada data berita")
+                        showToast(getString(R.string.no_news_data))
                     }
                 }
 
@@ -151,7 +141,6 @@ class NewsActivity : AppCompatActivity() {
             adapter = newsMainAdapter
         }
 
-        // Handle news item onClick
         newsMainAdapter.onItemClick = { selectedNews ->
             startActivity(Intent(this, NewsDetailActivity::class.java).apply {
                 putExtra(EXTRA_DATA, selectedNews)
@@ -160,11 +149,20 @@ class NewsActivity : AppCompatActivity() {
     }
 
     private fun showToast(message: String) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+    }
+
+    private fun setEdgeToEdgeInsets() {
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            insets
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean {
         onBackPressedDispatcher.onBackPressed()
         return true
     }
+
 }

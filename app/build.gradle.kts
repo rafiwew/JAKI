@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.parcelize)
     alias(libs.plugins.google.gms.google.services)
+    alias(libs.plugins.ksp)
 }
 
 android {
@@ -62,5 +63,8 @@ dependencies {
     implementation(libs.camera.view)
 
     implementation (libs.play.services.location)
-
+    ksp (libs.androidx.room.compiler)
+    implementation (libs.androidx.room.runtime)
+    implementation (libs.androidx.room.ktx)
+    implementation (libs.androidx.lifecycle.runtime.ktx)
 }

@@ -6,21 +6,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".berita.InformasiTerkiniActivity">
-
-    <com.google.android.material.divider.MaterialDivider
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@id/rv_news_informasi_terkini"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar" />
+    tools:context=".berita.SearchNewsActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:gravity="center"
+        android:background="@color/white"
+        android:gravity="center_vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -29,8 +22,8 @@
             android:id="@+id/iv_action_back"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:layout_marginEnd="20dp"
-            android:accessibilityTraversalAfter="@id/rv_news_informasi_terkini"
+            android:layout_marginEnd="0dp"
+            android:accessibilityTraversalAfter="@id/rv_search_news"
             android:clickable="true"
             android:contentDescription="@string/back_action"
             android:focusable="true"
@@ -39,28 +32,30 @@
             android:src="@drawable/ic_arrow_back"
             app:tint="@color/black" />
 
-        <TextView
-            android:id="@+id/tv_title_page"
-            android:layout_width="wrap_content"
+        <SearchView
+            android:id="@+id/search_view_news"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:accessibilityTraversalBefore="@id/rv_news_informasi_terkini"
-            android:fontFamily="@font/plus_jakarta_sans_bold"
-            android:text="@string/title_informasi_terkini"
-            android:textColor="@color/black"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:layout_marginHorizontal="16dp"
+            android:accessibilityTraversalBefore="@id/rv_search_news"
+            android:background="@drawable/rounded_rectangle_shape_full"
+            android:clickable="true"
+            android:focusable="true"
+            android:iconifiedByDefault="false"
+            android:queryHint="@string/hint_search_news"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
     </androidx.appcompat.widget.Toolbar>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_news_informasi_terkini"
+        android:id="@+id/rv_search_news"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:accessibilityTraversalAfter="@id/tv_title_page"
-        android:paddingHorizontal="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:accessibilityTraversalAfter="@id/search_view_news"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar"
-        tools:listitem="@layout/item_list_news" />
+        tools:listitem="@layout/item_list_search_news" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
