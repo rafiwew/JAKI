@@ -32,6 +32,15 @@
             android:src="@drawable/ic_arrow_back"
             app:tint="@color/black" />
 
+        <TextView
+            android:id="@+id/live_region_announcement"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:accessibilityLiveRegion="polite"
+            android:focusable="false"
+            android:importantForAccessibility="yes"
+            android:visibility="invisible"/>
+
         <SearchView
             android:id="@+id/search_view_news"
             android:layout_width="match_parent"
@@ -50,6 +59,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_search_news"
         android:layout_width="match_parent"
+
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
         android:accessibilityTraversalAfter="@id/search_view_news"

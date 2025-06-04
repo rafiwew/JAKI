@@ -2,9 +2,7 @@ package com.piwew.jaki.ui
 
 import android.content.Intent
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.view.accessibility.AccessibilityNodeInfo
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -12,6 +10,7 @@ import com.piwew.jaki.R
 import com.piwew.jaki.databinding.ItemListNewsBinding
 import com.piwew.jaki.model.News
 import com.piwew.jaki.utils.loadImage
+import com.piwew.jaki.utils.setAsAccessibilityCustomActionLabel
 
 class NewsAdapter : ListAdapter<News, NewsAdapter.ListViewHolder>(NewsDiffCallback()) {
 
@@ -51,19 +50,7 @@ class NewsAdapter : ListAdapter<News, NewsAdapter.ListViewHolder>(NewsDiffCallba
                     }
                     context.startActivity(Intent.createChooser(shareIntent, context.getString(R.string.share_news)))
                 }
-                itemView.accessibilityDelegate = object : View.AccessibilityDelegate() {
-                    override fun onInitializeAccessibilityNodeInfo(
-                        host: View,
-                        info: AccessibilityNodeInfo
-                    ) {
-                        super.onInitializeAccessibilityNodeInfo(host, info)
-                        val customClick = AccessibilityNodeInfo.AccessibilityAction(
-                            AccessibilityNodeInfo.ACTION_CLICK,
-                            itemView.context.getString(R.string.announce_action_read_news)
-                        )
-                        info.addAction(customClick)
-                    }
-                }
+                itemView.setAsAccessibilityCustomActionLabel(itemView.context.getString(R.string.announce_action_read_news))
             }
         }
 

@@ -86,6 +86,9 @@ class SearchNewsActivity : AppCompatActivity() {
     private fun setupSearchView() {
         binding.searchViewNews.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
+                if (query != null) {
+                    announceForAccessibility(getString(R.string.display_search_results_news, query))
+                }
                 query?.let { filterNews(it) }
                 return true
             }
@@ -115,9 +118,20 @@ class SearchNewsActivity : AppCompatActivity() {
 
             newsSearchAdapter.submitList(filteredList)
 
-            if (filteredList.isEmpty() && query.isNotEmpty()) {
-                showToast(getString(R.string.not_found_search_news))
+            val message = if (filteredList.isEmpty() && query.isNotEmpty()) {
+                getString(R.string.no_news_found)
+            } else {
+                getString(R.string.search_result_news_count, filteredList.size)
             }
+            announceForAccessibility(message)
+        }
+    }
+
+    private fun announceForAccessibility(message: String) {
+        val liveRegionView = binding.liveRegionAnnouncement
+        liveRegionView.apply {
+            text = message
+            announceForAccessibility(message)
         }
     }
 

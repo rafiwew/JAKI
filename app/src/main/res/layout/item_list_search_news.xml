@@ -5,9 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
+    android:layout_marginHorizontal="4dp"
     android:layout_marginVertical="8dp"
     android:backgroundTint="@color/white"
-    app:cardCornerRadius="8dp">
+    app:cardCornerRadius="8dp"
+    app:cardElevation="1.5dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/main"
@@ -20,15 +22,15 @@
 
         <TextView
             android:id="@+id/tv_title_saved_news"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
+            android:layout_marginEnd="16dp"
             android:drawablePadding="8dp"
             android:ellipsize="end"
             android:fontFamily="@font/plus_jakarta_sans_bold"
             android:gravity="center_vertical"
-            android:maxLength="38"
-            android:maxLines="1"
+            app:layout_constraintEnd_toStartOf="@+id/photo"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Pencanangan HUT ke-498 Kota Jakarta" />

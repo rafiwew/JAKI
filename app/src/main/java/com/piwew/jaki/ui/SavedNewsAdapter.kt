@@ -1,9 +1,7 @@
 package com.piwew.jaki.ui
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.view.accessibility.AccessibilityNodeInfo
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -11,6 +9,7 @@ import com.piwew.jaki.R
 import com.piwew.jaki.databinding.ItemListSavedNewsBinding
 import com.piwew.jaki.model.News
 import com.piwew.jaki.utils.loadImage
+import com.piwew.jaki.utils.setAsAccessibilityCustomActionLabel
 
 class SavedNewsAdapter(
     private val onItemClick: (News) -> Unit
@@ -37,19 +36,7 @@ class SavedNewsAdapter(
                 ibBookmark.contentDescription = itemView.context.getString(R.string.unbookmarked, news.title)
                 ibBookmark.setOnClickListener { }
                 root.setOnClickListener { onItemClick(news) }
-                itemView.accessibilityDelegate = object : View.AccessibilityDelegate() {
-                    override fun onInitializeAccessibilityNodeInfo(
-                        host: View,
-                        info: AccessibilityNodeInfo
-                    ) {
-                        super.onInitializeAccessibilityNodeInfo(host, info)
-                        val customClick = AccessibilityNodeInfo.AccessibilityAction(
-                            AccessibilityNodeInfo.ACTION_CLICK,
-                            itemView.context.getString(R.string.announce_action_read_news)
-                        )
-                        info.addAction(customClick)
-                    }
-                }
+                itemView.setAsAccessibilityCustomActionLabel(itemView.context.getString(R.string.announce_action_read_news))
             }
         }
     }

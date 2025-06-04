@@ -41,7 +41,6 @@ class NewsActivity : AppCompatActivity() {
         setEdgeToEdgeInsets()
         setupAccessibilityDelegates()
         setupClickListeners()
-
         setUpRecyclerView()
         getNewsData()
     }
@@ -113,17 +112,16 @@ class NewsActivity : AppCompatActivity() {
     }
 
     private fun getNewsData() {
-        databaseReference.addValueEventListener(object : ValueEventListener {
+        databaseReference.limitToFirst(3).addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val tempNewsList = ArrayList<News>()
                 for (getDataSnapshot in snapshot.children) {
                     val news = getDataSnapshot.getValue(News::class.java)
+                    news?.let { tempNewsList.add(it) }
+                }
 
-                    if (news != null) {
-                        tempNewsList.add(news)
-                    } else {
-                        showToast(getString(R.string.no_news_data))
-                    }
+                if (tempNewsList.isEmpty()) {
+                    showToast(getString(R.string.no_news_data))
                 }
 
                 newsMainAdapter.submitList(tempNewsList)

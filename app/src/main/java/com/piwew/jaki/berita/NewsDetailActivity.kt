@@ -147,6 +147,7 @@ class NewsDetailActivity : AppCompatActivity() {
                 tvItemPublished.text = it.publishedAt
                 tvItemContent.text = Html.fromHtml(it.content, Html.FROM_HTML_MODE_LEGACY)
                 tvItemContent.movementMethod = LinkMovementMethod.getInstance()
+                tvItemContent.linksClickable = true
 
                 updateLikesUI(it.likes)
                 updateBookmarkUI(it)
