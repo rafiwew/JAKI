@@ -1,16 +1,22 @@
 package com.piwew.jaki.laporan
 
+import android.content.ActivityNotFoundException
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.text.method.LinkMovementMethod
 import android.view.View
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.AccessibilityDelegateCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.core.view.accessibility.AccessibilityNodeInfoCompat
 import com.piwew.jaki.R
 import com.piwew.jaki.databinding.ActivityLaporanWargaMainBinding
+import com.piwew.jaki.utils.setAccessibilityAsButton
+import com.piwew.jaki.utils.setAsAccessibilityCustomActionLabel
 import com.piwew.jaki.utils.setAsAccessibilityHeading
+import com.piwew.jaki.utils.setAsAccessibilityRoleButton
 
 class LaporanWargaMainActivity : AppCompatActivity() {
 
@@ -24,14 +30,7 @@ class LaporanWargaMainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setEdgeToEdgeInsets()
-        binding.ivActionBack.setOnClickListener { onSupportNavigateUp() }
-
-        binding.btnBuatLaporanFoto.setOnClickListener {
-            val sheet = FullHeightBottomSheet()
-            sheet.show(supportFragmentManager, sheet.tag)
-        }
-
-        setupAccessibilityHeadings()
+        setupClickListeners()
         setupAccessibilityDelegates()
     }
 
@@ -40,25 +39,44 @@ class LaporanWargaMainActivity : AppCompatActivity() {
             binding.clCariLaporan,
             binding.clPantauLaporan,
             binding.clLihatLaporan,
-            binding.clKetahuiKondisiLaporan,
-            binding.clKirimPertanyaan
+            binding.clKetahuiKondisiLaporan
         ).forEach { view ->
-            ViewCompat.setAccessibilityDelegate(view, object : AccessibilityDelegateCompat() {
-                override fun onInitializeAccessibilityNodeInfo(
-                    host: View,
-                    info: AccessibilityNodeInfoCompat
-                ) {
-                    super.onInitializeAccessibilityNodeInfo(host, info)
-                    info.roleDescription = getString(R.string.role_button)
-                }
-            })
+            view.setAsAccessibilityRoleButton()
         }
-    }
 
-    private fun setupAccessibilityHeadings() {
         binding.tvTitlePage.setAsAccessibilityHeading()
         binding.tvEksplorLaporanWarga.setAsAccessibilityHeading()
         binding.tvButuhBantuan.setAsAccessibilityHeading()
+
+        binding.ivActionSearch.setAsAccessibilityCustomActionLabel(getString(R.string.announce_action_search_report))
+        binding.btnBuatLaporanFoto.setAsAccessibilityCustomActionLabel(getString(R.string.announce_action_make_report))
+        binding.btnBuatLaporanVideo.setAsAccessibilityCustomActionLabel(getString(R.string.announce_action_make_report))
+        binding.ivCloseInfo.setAsAccessibilityCustomActionLabel(getString(R.string.announce_action_close_info))
+        binding.clKirimPertanyaan.setAccessibilityAsButton(getString(R.string.announce_action_send_email))
+    }
+
+    private fun setupClickListeners() {
+        binding.ivActionBack.setOnClickListener { onSupportNavigateUp() }
+
+        binding.btnBuatLaporanFoto.setOnClickListener {
+            val sheet = FullHeightBottomSheet()
+            sheet.show(supportFragmentManager, sheet.tag)
+        }
+
+        binding.tvLinkPelajari.movementMethod = LinkMovementMethod.getInstance()
+        binding.ivCloseInfo.setOnClickListener { binding.clInfoBelumPernahMelapor.visibility = View.GONE }
+        binding.clKirimPertanyaan.setOnClickListener {
+            val email = binding.tvEmailJsc.text.toString()
+            val intent = Intent(Intent.ACTION_SENDTO).apply {
+                data = Uri.parse("mailto:")
+                putExtra(Intent.EXTRA_EMAIL, arrayOf(email))
+            }
+            try {
+                startActivity(intent)
+            } catch (e: ActivityNotFoundException) {
+                Toast.makeText(this, getString(R.string.not_found_email_app), Toast.LENGTH_LONG).show()
+            }
+        }
     }
 
     private fun setEdgeToEdgeInsets() {
@@ -73,4 +91,5 @@ class LaporanWargaMainActivity : AppCompatActivity() {
         onBackPressedDispatcher.onBackPressed()
         return true
     }
+
 }

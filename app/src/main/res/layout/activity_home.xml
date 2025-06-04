@@ -27,7 +27,7 @@
             android:id="@+id/btn_laporan_warga_feature"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/laporan_warga" />
+            android:text="@string/title_laporan_warga" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

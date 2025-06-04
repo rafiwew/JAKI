@@ -3,6 +3,7 @@ package com.piwew.jaki.laporan
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,9 +11,11 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
+import androidx.core.view.ViewCompat
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.piwew.jaki.R
 import com.piwew.jaki.databinding.BottomSheetFullBinding
 
 class FullHeightBottomSheet : BottomSheetDialogFragment() {
@@ -24,9 +27,9 @@ class FullHeightBottomSheet : BottomSheetDialogFragment() {
             ActivityResultContracts.RequestPermission()
         ) { isGranted: Boolean ->
             if (isGranted) {
-                Toast.makeText(requireActivity(), "Permission request granted", Toast.LENGTH_LONG).show()
+                showToast(getString(R.string.camera_permission_granted))
             } else {
-                Toast.makeText(requireActivity(), "Permission request denied", Toast.LENGTH_LONG).show()
+                showToast(getString(R.string.camera_permission_denied))
             }
         }
 
@@ -50,7 +53,7 @@ class FullHeightBottomSheet : BottomSheetDialogFragment() {
 
         binding.ivClose.setOnClickListener { dismiss() }
 
-        binding.btnBuatLaporan.setOnClickListener {
+        binding.btnBuatLaporanFoto.setOnClickListener {
             val intent = Intent(requireActivity(), CameraActivity::class.java)
             startActivity(intent)
             dismiss()
@@ -60,6 +63,32 @@ class FullHeightBottomSheet : BottomSheetDialogFragment() {
             requestPermissionLauncher.launch(REQUIRED_PERMISSION)
         }
 
+        bottomSheetAccessibility()
+    }
+
+    private fun bottomSheetAccessibility() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            ViewCompat.setAccessibilityPaneTitle(
+                binding.bottomSheetRoot,
+                getString(R.string.announce_instruction_sheet)
+            )
+        } else {
+            binding.bottomSheetRoot.post {
+                binding.bottomSheetRoot.announceForAccessibility(getString(R.string.announce_instruction_sheet))
+            }
+        }
+
+        ViewCompat.addAccessibilityAction(
+            binding.bottomSheetRoot,
+            getString(R.string.close_custom_action)
+        ) { _, _ ->
+            dismiss()
+            true
+        }
+    }
+
+    private fun showToast(message: String) {
+        Toast.makeText(requireActivity(), message, Toast.LENGTH_LONG).show()
     }
 
     override fun onStart() {
@@ -77,11 +106,8 @@ class FullHeightBottomSheet : BottomSheetDialogFragment() {
         dialog.setCancelable(false)
     }
 
-    override fun getTheme(): Int {
-        return com.google.android.material.R.style.Theme_Material3_Light_BottomSheetDialog
-    }
-
     companion object {
         private const val REQUIRED_PERMISSION = Manifest.permission.CAMERA
     }
+
 }

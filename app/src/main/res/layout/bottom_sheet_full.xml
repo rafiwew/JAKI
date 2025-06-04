@@ -4,216 +4,248 @@
     android:id="@+id/bottomSheetRoot"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg_bottom_sheet"
     android:orientation="vertical"
-    android:padding="24dp">
+    android:topLeftRadius="0dp"
+    android:topRightRadius="0dp"
+    android:padding="8dp">
 
     <ImageView
         android:id="@+id/iv_close"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_gravity="end"
-        android:layout_marginBottom="16dp"
         android:clickable="true"
         android:contentDescription="@string/close_action"
         android:focusable="true"
         android:importantForAccessibility="yes"
-        android:padding="14dp"
+        android:padding="12dp"
         android:src="@drawable/ic_close"
         app:tint="@color/black" />
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:fontFamily="@font/plus_jakarta_sans_bold"
-        android:text="@string/title_sheet"
-        android:textSize="20sp"
-        android:textStyle="bold" />
+        android:layout_marginTop="-16dp"
+        android:orientation="vertical"
+        android:padding="10dp">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:fontFamily="@font/plus_jakarta_sans"
-        android:text="@string/desc_title_sheet"
-        android:textSize="12sp"
-        android:textStyle="bold" />
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:contentDescription="@string/desc_tindak_lanjut_laporan"
-        android:importantForAccessibility="yes">
-
-        <ImageView
-            android:id="@+id/iv_point_one"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:importantForAccessibility="no"
-            android:src="@drawable/ic_email" />
-
-        <LinearLayout
+        <TextView
+            android:id="@+id/tv_title_page"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_toEndOf="@id/iv_point_one"
-            android:orientation="vertical">
+            android:layout_marginBottom="8dp"
+            android:fontFamily="@font/plus_jakarta_sans_bold"
+            android:text="@string/title_sheet"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:fontFamily="@font/plus_jakarta_sans_bold"
-                android:importantForAccessibility="no"
-                android:text="@string/title_tindak_lanjut_laporan"
-                android:textSize="14sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="20dp"
-                android:fontFamily="@font/plus_jakarta_sans"
-                android:importantForAccessibility="no"
-                android:text="@string/desc_tindak_lanjut_laporan"
-                android:textSize="12sp" />
-        </LinearLayout>
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:contentDescription="@string/desc_lokasi_laporan">
-
-        <ImageView
-            android:id="@+id/iv_point_two"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:importantForAccessibility="no"
-            android:src="@drawable/ic_email" />
-
-        <LinearLayout
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_toEndOf="@id/iv_point_two"
-            android:orientation="vertical">
+            android:layout_marginBottom="20dp"
+            android:fontFamily="@font/plus_jakarta_sans"
+            android:text="@string/desc_title_sheet"
+            android:textSize="13sp"
+            android:textStyle="bold" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:fontFamily="@font/plus_jakarta_sans_bold"
-                android:importantForAccessibility="no"
-                android:text="@string/title_lokasi_laporan"
-                android:textSize="14sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="20dp"
-                android:fontFamily="@font/plus_jakarta_sans"
-                android:importantForAccessibility="no"
-                android:text="@string/desc_lokasi_laporan"
-                android:textSize="12sp" />
-        </LinearLayout>
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:contentDescription="@string/desc_laporan_privat">
-
-        <ImageView
-            android:id="@+id/iv_point_three"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:importantForAccessibility="no"
-            android:src="@drawable/ic_email" />
-
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_toEndOf="@id/iv_point_three"
-            android:orientation="vertical">
+            android:layout_marginBottom="16dp"
+            android:contentDescription="@string/desc_tindak_lanjut_laporan"
+            android:importantForAccessibility="yes">
 
-            <TextView
+            <ImageView
+                android:id="@+id/iv_point_one"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:importantForAccessibility="no"
+                android:src="@drawable/ic_email"
+                app:tint="@color/colorPrimary" />
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:fontFamily="@font/plus_jakarta_sans_bold"
-                android:importantForAccessibility="no"
-                android:text="@string/title_laporan_privat_rahasia"
-                android:textSize="14sp"
-                android:textStyle="bold" />
+                android:layout_toEndOf="@id/iv_point_one"
+                android:orientation="vertical">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="20dp"
-                android:fontFamily="@font/plus_jakarta_sans"
-                android:importantForAccessibility="no"
-                android:text="@string/desc_laporan_privat"
-                android:textSize="12sp" />
-        </LinearLayout>
-    </RelativeLayout>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:fontFamily="@font/plus_jakarta_sans_bold"
+                    android:importantForAccessibility="no"
+                    android:text="@string/title_tindak_lanjut_laporan"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:contentDescription="@string/desc_laporan_publik">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="20dp"
+                    android:fontFamily="@font/plus_jakarta_sans_medium"
+                    android:importantForAccessibility="no"
+                    android:text="@string/desc_tindak_lanjut_laporan"
+                    android:textSize="13sp" />
+            </LinearLayout>
+        </RelativeLayout>
 
-        <ImageView
-            android:id="@+id/iv_point_four"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:importantForAccessibility="no"
-            android:src="@drawable/ic_email" />
-
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_toEndOf="@id/iv_point_four"
-            android:orientation="vertical">
+            android:layout_marginBottom="16dp"
+            android:contentDescription="@string/desc_lokasi_laporan">
 
-            <TextView
+            <ImageView
+                android:id="@+id/iv_point_two"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:importantForAccessibility="no"
+                android:src="@drawable/ic_email"
+                app:tint="@color/colorPrimary" />
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:fontFamily="@font/plus_jakarta_sans_bold"
-                android:importantForAccessibility="no"
-                android:text="@string/title_laporan_publik"
-                android:textSize="14sp"
-                android:textStyle="bold" />
+                android:layout_toEndOf="@id/iv_point_two"
+                android:orientation="vertical">
 
-            <TextView
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:fontFamily="@font/plus_jakarta_sans_bold"
+                    android:importantForAccessibility="no"
+                    android:text="@string/title_lokasi_laporan"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="20dp"
+                    android:fontFamily="@font/plus_jakarta_sans"
+                    android:importantForAccessibility="no"
+                    android:text="@string/desc_lokasi_laporan"
+                    android:textSize="13sp" />
+            </LinearLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:contentDescription="@string/desc_laporan_privat">
+
+            <ImageView
+                android:id="@+id/iv_point_three"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:importantForAccessibility="no"
+                android:src="@drawable/ic_email"
+                app:tint="@color/colorPrimary" />
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="20dp"
-                android:fontFamily="@font/plus_jakarta_sans"
+                android:layout_toEndOf="@id/iv_point_three"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:fontFamily="@font/plus_jakarta_sans_bold"
+                    android:importantForAccessibility="no"
+                    android:text="@string/title_laporan_privat_rahasia"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="20dp"
+                    android:fontFamily="@font/plus_jakarta_sans"
+                    android:importantForAccessibility="no"
+                    android:text="@string/desc_laporan_privat"
+                    android:textSize="13sp" />
+            </LinearLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:contentDescription="@string/desc_laporan_publik">
+
+            <ImageView
+                android:id="@+id/iv_point_four"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
                 android:importantForAccessibility="no"
-                android:text="@string/desc_laporan_publik"
-                android:textSize="12sp" />
-        </LinearLayout>
-    </RelativeLayout>
+                android:src="@drawable/ic_email"
+                app:tint="@color/colorPrimary" />
 
-    <CheckBox
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/label_checkbox"
-        android:textSize="14sp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/iv_point_four"
+                android:orientation="vertical">
 
-    <Button
-        android:id="@+id/btn_buat_laporan"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_gravity="bottom|center_vertical"
-        android:text="@string/buat_laporan_foto" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:fontFamily="@font/plus_jakarta_sans_bold"
+                    android:importantForAccessibility="no"
+                    android:text="@string/title_laporan_publik"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="20dp"
+                    android:fontFamily="@font/plus_jakarta_sans"
+                    android:importantForAccessibility="no"
+                    android:text="@string/desc_laporan_publik"
+                    android:textSize="13sp" />
+            </LinearLayout>
+        </RelativeLayout>
+
+        <CheckBox
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/plus_jakarta_sans_medium"
+            android:text="@string/label_checkbox"
+            android:textSize="13sp" />
+
+        <Button
+            android:id="@+id/btn_buat_laporan_foto"
+            style="@style/ButtonPrimary"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_gravity="bottom|center_vertical"
+            android:layout_marginTop="8dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:fontFamily="@font/plus_jakarta_sans_semibold"
+            android:text="@string/buat_laporan_foto" />
+
+    </LinearLayout>
+
 </LinearLayout>

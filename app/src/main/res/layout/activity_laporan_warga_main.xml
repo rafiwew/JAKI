@@ -5,6 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".laporan.LaporanWargaMainActivity">
 
     <androidx.appcompat.widget.Toolbar
@@ -23,7 +24,9 @@
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_marginEnd="20dp"
+            android:clickable="true"
             android:contentDescription="@string/back_action"
+            android:focusable="true"
             android:importantForAccessibility="yes"
             android:padding="12dp"
             android:src="@drawable/ic_arrow_back"
@@ -34,18 +37,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/plus_jakarta_sans_bold"
-            android:text="@string/laporan_warga"
+            android:text="@string/title_laporan_warga"
             android:textColor="@color/black"
             android:textSize="18sp"
             android:textStyle="bold" />
 
         <ImageView
             android:id="@+id/iv_action_search"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:layout_gravity="end"
-            android:contentDescription="@string/back_action"
+            android:clickable="true"
+            android:contentDescription="@string/cari_laporan_action"
+            android:focusable="true"
             android:importantForAccessibility="yes"
+            android:padding="12dp"
             android:src="@drawable/ic_search"
             app:tint="@color/black" />
     </androidx.appcompat.widget.Toolbar>
@@ -70,9 +76,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
-                android:background="@drawable/rounded_rectangle_shape"
-                android:elevation="2dp"
+                android:background="@drawable/bg_text_input"
                 android:gravity="center"
+                android:paddingBottom="4dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/toolbar">
@@ -85,25 +91,30 @@
                     android:padding="16dp">
 
                     <ImageView
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        android:clickable="false"
+                        android:focusable="false"
                         android:importantForAccessibility="no"
-                        android:src="@drawable/jsc" />
+                        android:src="@drawable/ic_laporan_warga" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="16dp"
+                        android:layout_marginBottom="20dp"
                         android:fontFamily="@font/plus_jakarta_sans_bold"
+                        android:lineSpacingExtra="5dp"
                         android:text="@string/title_questions"
                         android:textAlignment="center"
                         android:textColor="@color/black"
-                        android:textSize="16sp" />
+                        android:textSize="18sp" />
 
                     <Button
                         android:id="@+id/btn_buat_laporan_foto"
+                        style="@style/ButtonPrimary"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="60dp"
+                        android:fontFamily="@font/plus_jakarta_sans_bold"
                         android:text="@string/buat_laporan_foto"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -111,11 +122,13 @@
 
                     <Button
                         android:id="@+id/btn_buat_laporan_video"
-                        style="@style/Widget.Material3.Button.OutlinedButton"
+                        style="@style/OutlineRafi"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
+                        android:layout_height="60dp"
+                        android:layout_marginTop="8dp"
+                        android:fontFamily="@font/plus_jakarta_sans_bold"
                         android:text="@string/buat_laporan_video"
+                        android:textAllCaps="false"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/toolbar" />
@@ -123,10 +136,70 @@
 
             </RelativeLayout>
 
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_info_belum_pernah_melapor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/bg_text_input"
+                android:backgroundTint="#EAF0FF">
+
+                <ImageView
+                    android:id="@+id/iv_info"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:clickable="false"
+                    android:focusable="false"
+                    android:importantForAccessibility="no"
+                    android:src="@drawable/ic_info_outline"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="#1C5DDB" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="14dp"
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/iv_info"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                        android:id="@+id/tv_link_pelajari"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:fontFamily="@font/plus_jakarta_sans_semibold"
+                        android:lineSpacingExtra="3dp"
+                        android:text="@string/link_pelajari"
+                        android:textColor="@color/black"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/iv_close_info"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_margin="8dp"
+                    android:contentDescription="@string/close_action"
+                    android:importantForAccessibility="yes"
+                    android:padding="10dp"
+                    android:src="@drawable/ic_close"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="@color/black" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
             <LinearLayout
                 android:id="@+id/rl_section_eksplor"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="#EAF0FF"
                 android:gravity="center_horizontal"
                 android:orientation="vertical"
                 android:padding="16dp">
@@ -137,15 +210,15 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
                     android:fontFamily="@font/plus_jakarta_sans_bold"
-                    android:text="@string/eksplor_laporan_warga"
+                    android:text="@string/title_eksplor_laporan_warga"
                     android:textColor="@color/black"
-                    android:textSize="16sp" />
+                    android:textSize="18sp" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/cl_lihat_laporan"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
+                    android:layout_marginBottom="14dp"
                     android:background="@drawable/rounded_rectangle_shape"
                     android:clickable="true"
                     android:contentDescription="@string/lihat_laporan_warga_lainnya"
@@ -192,7 +265,7 @@
                     android:id="@+id/cl_pantau_laporan"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
+                    android:layout_marginBottom="14dp"
                     android:background="@drawable/rounded_rectangle_shape"
                     android:clickable="true"
                     android:contentDescription="@string/pantau_laporan"
@@ -239,7 +312,7 @@
                     android:id="@+id/cl_ketahui_kondisi_laporan"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
+                    android:layout_marginBottom="14dp"
                     android:background="@drawable/rounded_rectangle_shape"
                     android:clickable="true"
                     android:contentDescription="@string/ketahui_kondisi_laporan"
@@ -259,20 +332,22 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
+                        android:layout_marginEnd="45dp"
                         android:fontFamily="@font/plus_jakarta_sans_semibold"
                         android:importantForAccessibility="no"
-                        android:maxLength="35"
                         android:text="@string/ketahui_kondisi_laporan"
                         android:textColor="@color/black"
                         android:textSize="14sp"
                         app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/iv_kondisi"
                         app:layout_constraintStart_toEndOf="@id/iv_ketahui_kondisi_laporan"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <ImageView
+                        android:id="@+id/iv_kondisi"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:importantForAccessibility="no"
@@ -336,6 +411,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="#EAF0FF"
                 android:gravity="center_horizontal"
                 android:orientation="vertical"
                 android:padding="16dp">
@@ -348,16 +425,16 @@
                     android:fontFamily="@font/plus_jakarta_sans_bold"
                     android:text="@string/butuh_bantuan_lebih_lanjut"
                     android:textColor="@color/black"
-                    android:textSize="16sp" />
+                    android:textSize="18sp" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/cl_kirim_pertanyaan"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginBottom="4dp"
+                    android:layout_marginBottom="30dp"
                     android:background="@drawable/rounded_rectangle_shape"
                     android:clickable="true"
-                    android:contentDescription="@string/not_found"
+                    android:contentDescription="@string/cd_kirim_ke_email"
                     android:elevation="1dp"
                     android:focusable="true"
                     android:paddingHorizontal="16dp"
@@ -374,17 +451,30 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
+                        android:id="@+id/tv_kirim_email"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:fontFamily="@font/plus_jakarta_sans_bold"
                         android:importantForAccessibility="no"
-                        android:text="@string/not_found"
+                        android:text="@string/kirim_ke_email"
                         android:textColor="@color/black"
                         android:textSize="14sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toEndOf="@id/iv_not_found"
                         app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tv_email_jsc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:autoLink="email"
+                        android:fontFamily="@font/plus_jakarta_sans_bold"
+                        android:importantForAccessibility="yes"
+                        android:text="@string/email_jsc"
+                        android:textSize="14sp"
+                        app:layout_constraintStart_toEndOf="@id/iv_not_found"
+                        app:layout_constraintTop_toBottomOf="@id/tv_kirim_email" />
 
                     <ImageView
                         android:layout_width="wrap_content"

@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.widget.SearchView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,9 +14,11 @@ import com.google.android.material.chip.Chip
 import com.piwew.jaki.R
 import com.piwew.jaki.databinding.ActivityPilihKategoriLaporanBinding
 import com.piwew.jaki.laporan.CameraActivity.Companion.EXTRA_LAPORAN
+import com.piwew.jaki.laporan.TinjauLaporanActivity.Companion.EXTRA_IS_FROM_REVIEW
 import com.piwew.jaki.model.Category
 import com.piwew.jaki.model.LaporanData
 import com.piwew.jaki.ui.CategoryAdapter
+import com.piwew.jaki.utils.setAsAccessibilityCustomActionLabel
 import com.piwew.jaki.utils.setAsAccessibilityHeading
 import com.piwew.jaki.utils.setAsAccessibilityRoleButton
 import java.util.Random
@@ -26,6 +29,7 @@ class PilihKategoriLaporanActivity : AppCompatActivity() {
     private val categoryAdapter = CategoryAdapter()
     private var laporanData: LaporanData? = null
     private var allCategories = listOf<Category>()
+    private var isFromReviewScreen: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,8 +39,79 @@ class PilihKategoriLaporanActivity : AppCompatActivity() {
         setContentView(binding.root)
         setEdgeToEdgeInsets()
 
+        @Suppress("DEPRECATION")
+        laporanData = intent.getParcelableExtra(EXTRA_LAPORAN)
+        isFromReviewScreen = intent.getBooleanExtra(EXTRA_IS_FROM_REVIEW, false)
+
+        setupClickListeners()
+        setupAccessibilityDelegates()
+        setupSearchView()
+        setUpRecyclerViewCategory()
+        getCategoryData()
+        setupChipCategory()
+    }
+
+    private fun setupChipCategory() {
+        val categoryList = resources.getStringArray(R.array.categories).toList()
+
+        categoryList.forEach { selectedCategory ->
+            val chip = LayoutInflater.from(this)
+                .inflate(R.layout.chip_category, binding.chipCategory, false) as Chip
+            chip.id = Random().nextInt()
+            chip.text = selectedCategory
+            chip.typeface = ResourcesCompat.getFont(this, R.font.plus_jakarta_sans_medium)
+
+            chip.setOnClickListener {
+                handleCategorySelection(selectedCategory)
+            }
+
+            chip.setAsAccessibilityCustomActionLabel(
+                getString(R.string.announce_action_select_this_category)
+            )
+
+            binding.chipCategory.addView(chip)
+        }
+    }
+
+    private fun handleCategorySelection(selectedCategory: String) {
+        val updatedLaporan = laporanData?.copy(kategori = selectedCategory)
+
+        if (isFromReviewScreen) {
+            val resultIntent = Intent().apply {
+                putExtra(EXTRA_LAPORAN, updatedLaporan)
+            }
+            setResult(RESULT_OK, resultIntent)
+
+            announceForAccessibility(
+                getString(R.string.category_updated, selectedCategory)
+            )
+
+            finish()
+        } else {
+            val intent = Intent(this, TinjauLaporanActivity::class.java).apply {
+                putExtra(EXTRA_LAPORAN, updatedLaporan)
+            }
+            startActivity(intent)
+        }
+    }
+
+    private fun setupAccessibilityDelegates() {
+        binding.ivActionBack.setAsAccessibilityRoleButton()
+        binding.tvTitlePage.setAsAccessibilityHeading()
+        binding.tvRekomendasi.setAsAccessibilityHeading()
+        binding.tvSemuaKategori.setAsAccessibilityHeading()
+    }
+
+    private fun setupClickListeners() {
+        binding.ivActionBack.setOnClickListener { onSupportNavigateUp() }
+    }
+
+    private fun setupSearchView() {
         binding.searchViewCategory.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
+                if (query != null) {
+                    announceForAccessibility(getString(R.string.display_search_results_category, query))
+                }
                 return false
             }
 
@@ -44,45 +119,7 @@ class PilihKategoriLaporanActivity : AppCompatActivity() {
                 filterCategories(query.orEmpty())
                 return true
             }
-
         })
-
-        // Get data from intent
-        @Suppress("DEPRECATION")
-        laporanData = intent.getParcelableExtra(EXTRA_LAPORAN)
-
-        binding.ivActionBack.setOnClickListener { onSupportNavigateUp() }
-        binding.ivActionBack.setAsAccessibilityRoleButton()
-        binding.tvTitlePage.setAsAccessibilityHeading()
-        binding.tvRekomendasi.setAsAccessibilityHeading()
-        binding.tvSemuaKategori.setAsAccessibilityHeading()
-
-        setUpRecyclerViewCategory()
-        getCategoryData()
-
-        val categoryList = arrayListOf(
-            "Jalan",
-            "Parkir Liar",
-            "Pohon",
-            "Sampah"
-        )
-
-        categoryList.forEach { selectedCategory ->
-            val chip = LayoutInflater.from(this)
-                .inflate(R.layout.chip_layout, binding.chipCategory, false) as Chip
-            chip.id = Random().nextInt()
-            chip.text = selectedCategory
-            chip.setOnClickListener {
-                val updatedLaporan = laporanData?.copy(
-                    kategori = selectedCategory
-                )
-                val intent = Intent(this, TinjauLaporanActivity::class.java).apply {
-                    putExtra(EXTRA_LAPORAN, updatedLaporan)
-                }
-                startActivity(intent)
-            }
-            binding.chipCategory.addView(chip)
-        }
     }
 
     private fun filterCategories(query: String) {
@@ -94,21 +131,26 @@ class PilihKategoriLaporanActivity : AppCompatActivity() {
             }
         }
         categoryAdapter.submitList(filteredList)
+
+        val message = if (filteredList.isEmpty()) {
+            getString(R.string.no_category_found)
+        } else {
+            getString(R.string.search_result_count, filteredList.size)
+        }
+        announceForAccessibility(message)
+    }
+
+    private fun announceForAccessibility(message: String) {
+        val liveRegionView = binding.liveRegionAnnouncement
+        liveRegionView.apply {
+            text = message
+            announceForAccessibility(message)
+        }
     }
 
     private fun getCategoryData() {
-        val dummyCategories = listOf(
-            Category("Jalan Rusak"),
-            Category("Lampu Jalan Mati"),
-            Category("Parkir Liar"),
-            Category("Pohon Tumbang"),
-            Category("Sampah Menumpuk"),
-            Category("Banjir"),
-            Category("Lubang di Jalan"),
-            Category("Fasilitas Umum Rusak"),
-            Category("Trotoar Tidak Layak"),
-            Category("Penerangan Jalan")
-        )
+        val dummyCategories =
+            this.resources.getStringArray(R.array.dummy_categories).map { Category(it) }
 
         allCategories = dummyCategories
         categoryAdapter.submitList(dummyCategories)
@@ -121,14 +163,9 @@ class PilihKategoriLaporanActivity : AppCompatActivity() {
         }
 
         categoryAdapter.onItemClick = { selectedCategory ->
-            val updatedLaporan = laporanData?.copy(
-                kategori = selectedCategory.categoryName
-            )
-            val intent = Intent(this, TinjauLaporanActivity::class.java).apply {
-                putExtra(EXTRA_LAPORAN, updatedLaporan)
-            }
-            startActivity(intent)
+            handleCategorySelection(selectedCategory.categoryName)
         }
+
     }
 
     private fun setEdgeToEdgeInsets() {

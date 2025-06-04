@@ -5,8 +5,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.piwew.jaki.R
 import com.piwew.jaki.databinding.ItemListCategoryBinding
 import com.piwew.jaki.model.Category
+import com.piwew.jaki.utils.setAsAccessibilityCustomActionLabel
 
 class CategoryAdapter :
     ListAdapter<Category, CategoryAdapter.ListViewHolder>(CategoryDiffCallback()) {
@@ -27,6 +29,7 @@ class CategoryAdapter :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(data: Category) {
             binding.tvItemCategory.text = data.categoryName
+            itemView.setAsAccessibilityCustomActionLabel(itemView.context.getString(R.string.announce_action_select_this_category))
         }
 
         init {

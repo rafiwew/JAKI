@@ -2,12 +2,10 @@
 <com.google.android.material.chip.Chip xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    style="@style/Widget.Material3.Chip.Suggestion"
+    style="@style/ChipSuggest"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:textColor="#0466D4"
-    app:chipCornerRadius="20dp"
-    app:chipStrokeColor="#0466D4"
     app:textEndPadding="10dp"
     app:textStartPadding="10dp"
     tools:text="Parkir Liar" />

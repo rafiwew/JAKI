@@ -5,14 +5,8 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".laporan.AturLokasiLaporanActivity">
-
-    <com.google.android.material.divider.MaterialDivider
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -31,7 +25,9 @@
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_marginEnd="20dp"
+            android:clickable="true"
             android:contentDescription="@string/back_action"
+            android:focusable="true"
             android:importantForAccessibility="yes"
             android:padding="12dp"
             android:src="@drawable/ic_arrow_back"
@@ -55,11 +51,11 @@
             android:contentDescription="@string/cd_langkah_2"
             android:fontFamily="@font/plus_jakarta_sans_semibold"
             android:text="@string/langkah_2"
-            android:textColor="@color/black"
+            android:textColor="#0466D4"
             android:textSize="14sp" />
     </androidx.appcompat.widget.Toolbar>
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:id="@+id/scrollView"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -79,8 +75,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
-                android:background="@drawable/rounded_rectangle_shape"
-                android:elevation="2dp"
+                android:background="@drawable/bg_text_input"
                 android:gravity="top">
 
                 <FrameLayout
@@ -92,23 +87,22 @@
                         android:id="@+id/photo"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:cardCornerRadius="8dp">
+                        app:cardCornerRadius="12dp">
 
                         <ImageView
                             android:id="@+id/previewImageView"
                             android:layout_width="match_parent"
-                            android:layout_height="200dp"
+                            android:layout_height="185dp"
                             android:contentDescription="@string/gambar_yang_kamu_pilih"
-                            android:radius="18dp"
                             android:scaleType="centerCrop"
                             tools:srcCompat="@tools:sample/avatars" />
                     </androidx.cardview.widget.CardView>
 
-                    <com.google.android.material.button.MaterialButton
+                    <Button
                         android:id="@+id/btn_ganti_foto"
                         style="@style/Button"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="48dp"
                         android:layout_gravity="bottom|end"
                         android:layout_margin="16dp"
                         android:contentDescription="@string/ganti_foto"
@@ -120,7 +114,6 @@
                         app:backgroundTint="#EAF0FF"
                         app:icon="@drawable/ic_edit"
                         app:iconTint="#1C5DDB" />
-
                 </FrameLayout>
 
                 <TextView
@@ -172,27 +165,30 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginVertical="8dp"
-                android:background="@drawable/rounded_rectangle_shape"
-                android:elevation="2dp"
+                android:background="@drawable/bg_text_input"
                 android:gravity="top">
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/cv_location"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:elevation="10dp"
-                    app:cardBackgroundColor="@color/colorLightGray"
-                    app:cardCornerRadius="8dp">
+                    app:cardBackgroundColor="#EAF0FF"
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="1dp">
 
                     <com.google.android.material.switchmaterial.SwitchMaterial
                         android:id="@+id/switch_location"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="16dp"
-                        app:thumbTint="@color/white"
-                        tools:checked="true"
+                        android:clickable="true"
+                        android:contentDescription="@string/cd_switch_lokasi_foto"
+                        android:focusable="true"
                         android:fontFamily="@font/plus_jakarta_sans_medium"
-                        android:text="@string/sama_dengan_lokasi_foto" />
+                        android:text="@string/sama_dengan_lokasi_foto"
+                        app:thumbTint="@color/colorPrimary"
+                        app:trackTint="#94BAFF"
+                        tools:checked="true" />
                 </androidx.cardview.widget.CardView>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -200,54 +196,64 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/cv_location"
                     android:layout_marginHorizontal="16dp"
-                    android:layout_marginVertical="10dp"
+                    android:layout_marginVertical="8dp"
                     android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/tv_lokasi_laporan"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginVertical="4dp"
                         android:fontFamily="@font/plus_jakarta_sans_bold"
-                        android:gravity="start"
-                        android:maxLength="40"
                         android:textColor="@color/black"
-                        android:textSize="16sp"
+                        android:textSize="14sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/iv_action_lokasi_laporan"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        tools:text="Gunung Putri, Bogor, 17435, West Java, ID" />
+                        tools:text="Gunung Putri, Bogor, 17435, West Java, ID Gunung Putri, Bogor, 17435, West Java, ID" />
 
                     <ImageView
-                        android:id="@+id/iv_action"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
+                        android:id="@+id/iv_action_lokasi_laporan"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
                         android:contentDescription="@string/action_edit"
                         android:importantForAccessibility="yes"
+                        android:padding="12dp"
                         android:src="@drawable/ic_edit"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:tint="@color/black" />
+                        app:tint="#1C5DDB" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </RelativeLayout>
 
-            <TextView
-                android:id="@+id/tv_detail_alamat_laporan"
-                android:layout_width="match_parent"
+            <LinearLayout
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="10dp"
-                android:fontFamily="@font/plus_jakarta_sans_bold"
-                android:text="@string/detail_alamat_laporan"
-                android:textSize="16sp" />
+                android:contentDescription="@string/cd_detail_alamat_laporan"
+                android:orientation="vertical">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16dp"
-                android:layout_marginTop="4dp"
-                android:fontFamily="@font/plus_jakarta_sans"
-                android:text="@string/hint_detail_alamat_laporan"
-                android:textSize="12sp" />
+                <TextView
+                    android:id="@+id/tv_detail_alamat_laporan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/plus_jakarta_sans_bold"
+                    android:importantForAccessibility="no"
+                    android:text="@string/detail_alamat_laporan"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:fontFamily="@font/plus_jakarta_sans"
+                    android:importantForAccessibility="no"
+                    android:text="@string/hint_detail_alamat_laporan"
+                    android:textSize="14sp" />
+            </LinearLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
@@ -260,7 +266,8 @@
                     android:id="@+id/detailAddressEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/rounded_rectangle_shape"
+                    android:background="@drawable/bg_text_input"
+                    android:fontFamily="@font/plus_jakarta_sans_medium"
                     android:gravity="top"
                     android:hint="@string/detail_address"
                     android:inputType="textMultiLine"
@@ -275,13 +282,17 @@
             <Button
                 android:id="@+id/btn_next_to_tulis_detail_laporan"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="55dp"
                 android:layout_gravity="bottom"
                 android:layout_marginHorizontal="16dp"
-                android:layout_marginTop="50dp"
-                android:text="@string/next" />
-
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="50dp"
+                android:background="@drawable/bg_text_input"
+                android:fontFamily="@font/plus_jakarta_sans_bold"
+                android:text="@string/next"
+                android:textSize="16sp" />
         </LinearLayout>
-    </ScrollView>
+
+    </androidx.core.widget.NestedScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

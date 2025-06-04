@@ -5,13 +5,10 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.OrientationEventListener
 import android.view.Surface
-import android.view.WindowInsets
-import android.view.WindowManager
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.PickVisualMediaRequest
@@ -32,7 +29,6 @@ import com.piwew.jaki.R
 import com.piwew.jaki.databinding.ActivityCameraBinding
 import com.piwew.jaki.model.LaporanData
 import com.piwew.jaki.utils.createCustomTempFile
-import com.piwew.jaki.utils.getImageUri
 import com.piwew.jaki.utils.setAsAccessibilityHeading
 import com.piwew.jaki.utils.setAsAccessibilityRoleButton
 
@@ -54,21 +50,66 @@ class CameraActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setEdgeToEdgeInsets()
+        setupAccessibilityDelegates()
+        setupClickListeners()
+        // requestLocationPermissionIfNeeded()
+    }
 
-        binding.ivActionBack.setOnClickListener { onSupportNavigateUp() }
+    private fun setupAccessibilityDelegates() {
         binding.ivActionBack.setAsAccessibilityRoleButton()
+        binding.switchCamera.setAsAccessibilityRoleButton()
+        binding.btnGallery.setAsAccessibilityRoleButton()
+        binding.btnCaptureImage.setAsAccessibilityRoleButton()
         binding.tvTitlePage.setAsAccessibilityHeading()
 
+        ViewCompat.addAccessibilityAction(
+            binding.root,
+            getString(R.string.action_capture)
+        ) { _, _ ->
+            takePhotoAndGetMyLastLocation()
+            true
+        }
+
+        ViewCompat.addAccessibilityAction(
+            binding.root,
+            getString(R.string.action_gallery)
+        ) { _, _ ->
+            startGallery()
+            true
+        }
+    }
+
+    private fun setupClickListeners() {
+        binding.ivActionBack.setOnClickListener { onSupportNavigateUp() }
         binding.switchCamera.setOnClickListener {
             cameraSelector =
                 if (cameraSelector == CameraSelector.DEFAULT_BACK_CAMERA) CameraSelector.DEFAULT_FRONT_CAMERA
                 else CameraSelector.DEFAULT_BACK_CAMERA
             startCamera()
         }
-        binding.captureImage.setOnClickListener { getMyLastLocation() }
-        binding.btnGaleri.setOnClickListener { startGallery() }
-        //binding.captureImage.setOnClickListener { takePhoto() }
-        //belumdipake -> binding.btnCameryIntent.setOnClickListener { startIntentCamera() }
+        binding.btnCaptureImage.setOnClickListener { takePhotoAndGetMyLastLocation() }
+        binding.btnGallery.setOnClickListener { startGallery() }
+    }
+
+    private fun requestLocationPermissionIfNeeded() {
+        if (!checkPermission(Manifest.permission.ACCESS_FINE_LOCATION) ||
+            !checkPermission(Manifest.permission.ACCESS_COARSE_LOCATION)
+        ) {
+            requestPermissionLauncher.launch(
+                arrayOf(
+                    Manifest.permission.ACCESS_FINE_LOCATION,
+                    Manifest.permission.ACCESS_COARSE_LOCATION
+                )
+            )
+        } else {
+            fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+            fusedLocationClient.getCurrentLocation(
+                Priority.PRIORITY_HIGH_ACCURACY,
+                null
+            ).addOnSuccessListener { location: Location? ->
+                currentLocation = location
+            }
+        }
     }
 
     private fun startCamera() {
@@ -94,14 +135,12 @@ class CameraActivity : AppCompatActivity() {
                 )
 
             } catch (exc: Exception) {
-                Toast.makeText(
-                    this@CameraActivity,
-                    "Gagal memunculkan kamera.",
-                    Toast.LENGTH_SHORT
-                ).show()
+                showToast(getString(R.string.failed_show_camera))
                 Log.e(TAG, "startCamera: ${exc.message}")
             }
         }, ContextCompat.getMainExecutor(this))
+
+        updateSwitchCameraContentDescription()
     }
 
     private fun takePhoto() {
@@ -132,36 +171,11 @@ class CameraActivity : AppCompatActivity() {
                 }
 
                 override fun onError(exc: ImageCaptureException) {
-                    Toast.makeText(
-                        this@CameraActivity,
-                        "Gagal mengambil gambar.",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    showToast(getString(R.string.failed_take_image))
                     Log.e(TAG, "onError: ${exc.message}")
                 }
             }
         )
-    }
-
-    private fun setEdgeToEdgeInsets() {
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
-    }
-
-    private fun hideSystemUI() {
-        @Suppress("DEPRECATION")
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            window.insetsController?.hide(WindowInsets.Type.statusBars())
-        } else {
-            window.setFlags(
-                WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN
-            )
-        }
-        supportActionBar?.hide()
     }
 
     private val orientationEventListener by lazy {
@@ -181,22 +195,6 @@ class CameraActivity : AppCompatActivity() {
                 imageCapture?.targetRotation = rotation
             }
         }
-    }
-
-    override fun onStart() {
-        super.onStart()
-        orientationEventListener.enable()
-    }
-
-    public override fun onResume() {
-        super.onResume()
-        //hideSystemUI()
-        startCamera()
-    }
-
-    override fun onStop() {
-        super.onStop()
-        orientationEventListener.disable()
     }
 
     /* Gallery */
@@ -219,28 +217,8 @@ class CameraActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         } else {
+            showToast(getString(R.string.no_image_selected))
             Log.d("Photo Picker", "No media selected")
-            Toast.makeText(this, "Tidak ada gambar yang dipilih.", Toast.LENGTH_SHORT).show()
-        }
-    }
-
-    /* Intent Camera*/
-    private fun startIntentCamera() {
-        currentImageUri = getImageUri(this)
-        launcherIntentCamera.launch(currentImageUri!!)
-    }
-
-    private val launcherIntentCamera = registerForActivityResult(
-        ActivityResultContracts.TakePicture()
-    ) { isSuccess ->
-        if (isSuccess && currentImageUri != null) {
-            val intent = Intent(this, AturLokasiLaporanActivity::class.java)
-            intent.putExtra(EXTRA_LAPORAN, currentImageUri.toString())
-            startActivity(intent)
-            finish()
-        } else {
-            Toast.makeText(this, "Foto gagal dicapture", Toast.LENGTH_SHORT).show()
-            currentImageUri = null
         }
     }
 
@@ -248,9 +226,17 @@ class CameraActivity : AppCompatActivity() {
     private val requestPermissionLauncher =
         registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
             when {
-                permissions[Manifest.permission.ACCESS_FINE_LOCATION] ?: false -> { getMyLastLocation() }
-                permissions[Manifest.permission.ACCESS_COARSE_LOCATION] ?: false -> { getMyLastLocation() }
-                else -> { Toast.makeText(this, "Izin lokasi ditolak", Toast.LENGTH_SHORT).show() }
+                permissions[Manifest.permission.ACCESS_FINE_LOCATION] ?: false -> {
+                    takePhotoAndGetMyLastLocation()
+                }
+
+                permissions[Manifest.permission.ACCESS_COARSE_LOCATION] ?: false -> {
+                    takePhotoAndGetMyLastLocation()
+                }
+
+                else -> {
+                    showToast(getString(R.string.location_permission_denied))
+                }
             }
         }
 
@@ -261,7 +247,7 @@ class CameraActivity : AppCompatActivity() {
         ) == PackageManager.PERMISSION_GRANTED
     }
 
-    private fun getMyLastLocation() {
+    private fun takePhotoAndGetMyLastLocation() {
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
         if (checkPermission(Manifest.permission.ACCESS_FINE_LOCATION) && checkPermission(Manifest.permission.ACCESS_COARSE_LOCATION)) {
@@ -286,8 +272,50 @@ class CameraActivity : AppCompatActivity() {
         }
     }
 
+    private fun updateSwitchCameraContentDescription() {
+        val description = if (cameraSelector == CameraSelector.DEFAULT_BACK_CAMERA) {
+            getString(R.string.switch_to_front_camera)
+        } else {
+            getString(R.string.switch_to_back_camera)
+        }
+        binding.switchCamera.contentDescription = description
+    }
+
+    private fun showToast(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressedDispatcher.onBackPressed()
+        return true
+    }
+
+    private fun setEdgeToEdgeInsets() {
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            insets
+        }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        orientationEventListener.enable()
+    }
+
+    public override fun onResume() {
+        super.onResume()
+        startCamera()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        orientationEventListener.disable()
+    }
+
     companion object {
         private const val TAG = "CameraActivity"
         const val EXTRA_LAPORAN = "DATA"
     }
+
 }
