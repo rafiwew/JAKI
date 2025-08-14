@@ -1,10 +1,13 @@
 package com.piwew.jaki.laporan
 
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -70,6 +73,19 @@ class PilihJenisLaporanBottomSheet : BottomSheetDialogFragment() {
 
         binding.radioPrivat.setRadioGroupHeading(binding.radioGroup)
         binding.radioPublik.setRadioGroupHeading(binding.radioGroup)
+
+        val states = arrayOf(
+            intArrayOf(-android.R.attr.state_checked),
+            intArrayOf(android.R.attr.state_checked)
+        )
+
+        val colors = intArrayOf(
+            Color.GRAY,
+            ContextCompat.getColor(requireActivity(), R.color.colorSecondary)
+        )
+
+        binding.radioPrivat.buttonTintList = ColorStateList(states, colors)
+        binding.radioPublik.buttonTintList = ColorStateList(states, colors)
         bottomSheetAccessibility()
     }
 

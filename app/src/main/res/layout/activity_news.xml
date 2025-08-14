@@ -23,15 +23,17 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="230dp"
+                android:layout_height="wrap_content"
                 android:background="#1354E4"
+                android:minHeight="230dp"
                 android:orientation="vertical">
 
                 <androidx.appcompat.widget.Toolbar
                     android:id="@+id/toolbar_news"
                     android:layout_width="match_parent"
-                    android:layout_height="?attr/actionBarSize"
+                    android:layout_height="wrap_content"
                     android:gravity="center"
+                    android:minHeight="?attr/actionBarSize"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
@@ -41,7 +43,6 @@
                         android:layout_width="48dp"
                         android:layout_height="48dp"
                         android:layout_marginEnd="20dp"
-                        android:accessibilityTraversalAfter="@id/tv_title_page"
                         android:clickable="true"
                         android:contentDescription="@string/back_action"
                         android:focusable="true"
@@ -112,7 +113,7 @@
                     android:layout_toEndOf="@id/iv_search"
                     android:fontFamily="@font/plus_jakarta_sans_medium"
                     android:text="@string/hint_search_news"
-                    android:textSize="14sp" />
+                    android:textSize="16sp" />
             </RelativeLayout>
 
             <TextView
@@ -246,18 +247,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingHorizontal="16dp"
-                tools:listitem="@layout/item_list_news" />
+                tools:listitem="@layout/item_list_main_news" />
 
             <Button
                 android:id="@+id/btn_view_all"
                 android:layout_width="match_parent"
-                android:layout_height="65dp"
+                android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="10dp"
                 android:backgroundTint="@color/white"
                 android:clickable="true"
                 android:focusable="true"
                 android:fontFamily="@font/plus_jakarta_sans_bold"
+                android:minHeight="65dp"
                 android:text="@string/lihat_lebih_banyak"
                 android:textAllCaps="false"
                 android:textColor="#032D94"

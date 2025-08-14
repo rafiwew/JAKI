@@ -3,7 +3,7 @@ package com.piwew.jaki.laporan
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.widget.SearchView
+import androidx.appcompat.widget.SearchView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
@@ -49,6 +49,12 @@ class PilihKategoriLaporanActivity : AppCompatActivity() {
         setUpRecyclerViewCategory()
         getCategoryData()
         setupChipCategory()
+
+        binding.searchViewCategory.post {
+            binding.searchViewCategory.setIconifiedByDefault(false)
+            binding.searchViewCategory.isIconified = true
+            binding.searchViewCategory.queryHint = getString(R.string.hint_search_category)
+        }
     }
 
     private fun setupChipCategory() {

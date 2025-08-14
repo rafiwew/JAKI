@@ -6,9 +6,9 @@
     android:layout_height="match_parent"
     android:background="@drawable/bg_bottom_sheet"
     android:orientation="vertical"
+    android:padding="8dp"
     android:topLeftRadius="0dp"
-    android:topRightRadius="0dp"
-    android:padding="8dp">
+    android:topRightRadius="0dp">
 
     <ImageView
         android:id="@+id/iv_close"
@@ -238,12 +238,13 @@
             android:id="@+id/btn_buat_laporan_foto"
             style="@style/ButtonPrimary"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="bottom|center_vertical"
             android:layout_marginTop="8dp"
             android:clickable="true"
             android:focusable="true"
             android:fontFamily="@font/plus_jakarta_sans_semibold"
+            android:minHeight="60dp"
             android:text="@string/buat_laporan_foto" />
 
     </LinearLayout>

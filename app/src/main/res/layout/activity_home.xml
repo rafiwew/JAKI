@@ -5,6 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".HomeActivity">
 
     <LinearLayout
@@ -17,17 +18,59 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <Button
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/plus_jakarta_sans_bold"
+            android:importantForAccessibility="no"
+            android:text="@string/title_news"
+            android:textColor="@color/colorPrimary"
+            android:textSize="24sp" />
+
+        <ImageButton
             android:id="@+id/btn_news_feature"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="60dp"
+            android:backgroundTint="@color/white"
+            android:clickable="true"
+            android:contentDescription="@string/title_news"
+            android:focusable="true"
+            android:src="@drawable/ic_news_feature"
             android:text="@string/title_news" />
 
-        <Button
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/plus_jakarta_sans_bold"
+            android:importantForAccessibility="no"
+            android:text="@string/title_laporan_warga"
+            android:textColor="@color/colorPrimary"
+            android:textSize="24sp" />
+
+        <ImageButton
             android:id="@+id/btn_laporan_warga_feature"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/white"
+            android:clickable="true"
+            android:contentDescription="@string/title_laporan_warga"
+            android:focusable="true"
+            android:src="@drawable/ic_citizen_report_feature"
             android:text="@string/title_laporan_warga" />
+
+        <TextView
+            android:id="@+id/tv_credit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="42dp"
+            android:layout_marginTop="50dp"
+            android:fontFamily="@font/plus_jakarta_sans"
+            android:importantForAccessibility="yes"
+            android:lineSpacingExtra="2dp"
+            android:text="@string/desc_app"
+            android:textAlignment="center"
+            android:textSize="12sp" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

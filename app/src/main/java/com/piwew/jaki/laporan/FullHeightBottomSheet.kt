@@ -17,6 +17,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.piwew.jaki.R
 import com.piwew.jaki.databinding.BottomSheetFullBinding
+import com.piwew.jaki.utils.setAsAccessibilityCustomActionLabel
 
 class FullHeightBottomSheet : BottomSheetDialogFragment() {
 
@@ -85,6 +86,9 @@ class FullHeightBottomSheet : BottomSheetDialogFragment() {
             dismiss()
             true
         }
+
+        binding.btnBuatLaporanFoto.setAsAccessibilityCustomActionLabel(getString(R.string.announce_action_make_report))
+
     }
 
     private fun showToast(message: String) {

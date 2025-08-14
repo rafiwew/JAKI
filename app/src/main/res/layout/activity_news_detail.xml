@@ -17,8 +17,9 @@
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="@color/white">
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:minHeight="?attr/actionBarSize">
 
             <ImageView
                 android:id="@+id/iv_action_back"
@@ -185,6 +186,7 @@
                         android:drawablePadding="8dp"
                         android:fontFamily="@font/plus_jakarta_sans"
                         android:gravity="center_vertical"
+                        android:padding="12dp"
                         android:text="@string/likes"
                         android:textSize="12sp"
                         app:drawableStartCompat="@drawable/ic_favorite_border"
@@ -205,7 +207,7 @@
                         android:layout_width="48dp"
                         android:layout_height="48dp"
                         android:layout_alignParentEnd="true"
-                        android:layout_marginEnd="0dp"
+                        android:layout_centerVertical="true"
                         android:accessibilityLiveRegion="polite"
                         android:backgroundTint="@color/white"
                         android:contentDescription="@string/save_news"

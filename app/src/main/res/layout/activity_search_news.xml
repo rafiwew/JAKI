@@ -11,9 +11,10 @@
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
+        android:layout_height="wrap_content"
         android:background="@color/white"
         android:gravity="center_vertical"
+        android:minHeight="?attr/actionBarSize"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -39,9 +40,9 @@
             android:accessibilityLiveRegion="polite"
             android:focusable="false"
             android:importantForAccessibility="yes"
-            android:visibility="invisible"/>
+            android:visibility="invisible" />
 
-        <SearchView
+        <com.piwew.jaki.utils.CustomSearchView
             android:id="@+id/search_view_news"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -51,7 +52,9 @@
             android:clickable="true"
             android:focusable="true"
             android:iconifiedByDefault="false"
+            android:minHeight="50dp"
             android:queryHint="@string/hint_search_news"
+            android:theme="@style/CustomSearchViewStyle"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
     </androidx.appcompat.widget.Toolbar>
@@ -59,7 +62,6 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_search_news"
         android:layout_width="match_parent"
-
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
         android:accessibilityTraversalAfter="@id/search_view_news"

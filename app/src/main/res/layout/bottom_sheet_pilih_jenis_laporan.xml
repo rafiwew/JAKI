@@ -49,34 +49,121 @@
                 android:id="@+id/radioPrivat"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:buttonTint="@color/colorPrimary"
                 android:checked="true"
-                android:fontFamily="@font/plus_jakarta_sans_medium"
+                android:fontFamily="@font/plus_jakarta_sans_bold"
                 android:paddingHorizontal="8dp"
                 android:text="@string/option_private"
                 android:textSize="14sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvPrivateDesc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/plus_jakarta_sans_medium"
+                    android:text="@string/option_private_desc"
+                    android:textSize="12sp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@string/cd_option_private"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:fontFamily="@font/plus_jakarta_sans_semibold"
+                        android:text="@string/option_private_desc_2"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:fontFamily="@font/plus_jakarta_sans_medium"
+                        android:text="@string/option_private_desc_3"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+            </LinearLayout>
 
             <RadioButton
                 android:id="@+id/radioPublik"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
                 android:buttonTint="@color/colorPrimary"
-                android:fontFamily="@font/plus_jakarta_sans_medium"
+                android:fontFamily="@font/plus_jakarta_sans_bold"
                 android:paddingHorizontal="8dp"
                 android:text="@string/option_public"
                 android:textSize="14sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvPublicDesc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/plus_jakarta_sans_medium"
+                    android:text="@string/option_public_desc"
+                    android:textSize="12sp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@string/cd_option_public"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:fontFamily="@font/plus_jakarta_sans_semibold"
+                        android:importantForAccessibility="no"
+                        android:text="@string/option_public_desc_2"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:fontFamily="@font/plus_jakarta_sans_medium"
+                        android:importantForAccessibility="no"
+                        android:lineSpacingExtra="2dp"
+                        android:text="@string/option_public_desc_3"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+            </LinearLayout>
+
         </RadioGroup>
 
         <Button
             android:id="@+id/btn_pilih_jenis_laporan"
             style="@style/ButtonPrimary"
             android:layout_width="match_parent"
-            android:layout_height="55dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="bottom|center_vertical"
             android:layout_marginTop="30dp"
             android:clickable="true"
             android:focusable="true"
             android:fontFamily="@font/plus_jakarta_sans_semibold"
+            android:minHeight="55dp"
             android:text="@string/save"
             android:textSize="16sp" />
     </LinearLayout>

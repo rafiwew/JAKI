@@ -1,6 +1,9 @@
 <resources>
 
     <string name="app_name">JAKI</string>
+    <string name="desc_app">User interface (UI) improvements for the Jakarta Kini (JAKI) application, focusing on accessibility, as a case study of the Jakarta Provincial Government\'s mobile application</string>
+    <string name="try_news_feature">mencoba fitur berita</string>
+    <string name="try_citizen_report_feature">mencoba fitur laporan warga</string>
     <string name="JSC">Unit Pengelola Jakarta Smart City</string>
     <string name="kirim_ke_email">Kirim email pertanyaan ke tim JSC</string>
     <string name="email_jsc">smartcity@jakarta.go.id</string>
@@ -55,7 +58,7 @@
     <string name="title_informasi_terkini">Informasi Terkini</string>
     <string name="lihat_lebih_banyak">Lihat Lebih Banyak Informasi Terkini</string>
     <string name="title_saved_news">Lihat Berita yang Kamu Simpan</string>
-    <string name="berita_disimpan">Berita Disimpan</string>
+    <string name="berita_disimpan">Berita yang kamu simpan</string>
     <string name="title_tidak_menemukan">Tidak Menemukan yang Kamu Cari?</string>
 
     <!--Halaman Detail Berita-->
@@ -92,10 +95,12 @@
     <string name="likes">%1$s suka</string>
     <string name="share_news">Bagikan berita: %1$s ke media sosial atau aplikasi lainnya</string>
     <string name="cd_likes_and_date">Disukai oleh %1$s orang, tanggal %2$s</string>
+    <string name="cd_date">terbit tanggal %1$s</string>
     <string name="news_date">Tanggal %1$s</string>
     <string name="display_search_results_news">Menampilkan hasil untuk \"%1$s\"</string>
     <string name="search_result_news_count">%1$d berita ditemukan</string>
     <string name="no_news_found">Tidak ada berita ditemukan</string>
+    <string name="delete_search_query">Hapus kueri pencarian</string>
 
     <!--Custom action label fitur berita-->
     <string name="announce_action_search_report">mencari laporan</string>
@@ -138,6 +143,9 @@
     <string name="action_switch_camera">Balik kamera</string>
     <string name="switch_to_front_camera">Ganti ke kamera depan. Saat ini kamera belakang aktif</string>
     <string name="switch_to_back_camera">Ganti ke kamera belakang. Saat ini kamera depan aktif</string>
+    <string name="switch_camera">mengganti</string>
+    <string name="open_gallery">membuka galeri</string>
+    <string name="capture_image">mengambil foto</string>
 
     <!--Halaman Atur Lokasi Laporan-->
     <string name="atur_lokasi_laporan">Atur Lokasi Laporan</string>
@@ -161,6 +169,8 @@
     <string name="announce_instruction_sheet_edit_location">Edit lokasi laporan</string>
     <string name="announce_location_updated">Lokasi laporan berhasil diperbarui</string>
     <string name="announce_action_location_updated">menyimpan lokasi yang diperbarui</string>
+    <string name="cd_location_report">Lokasi laporan kamu: %1$s</string>
+    <string name="hint_input_edit_location">Masukkan lokasi manual</string>
 
     <!--Halaman Tulis Detail Laporan-->
     <string name="langkah_3">Langkah 3/5</string>
@@ -253,11 +263,21 @@
     <string name="category_updated">Kategori laporan diperbarui menjadi: %1$s</string>
 
     <string name="report_successfully_created">Laporan berhasil dibuat</string>
-    <string name="title_pilih_jenis_laporan">Pilih Jenis Laporan</string>
+    <string name="title_pilih_jenis_laporan">Opsi Pilihan Jenis Laporan</string>
     <string name="option_public">Publik</string>
     <string name="option_private">Privat/Rahasia</string>
     <string name="announce_action_jenis_laporan_updated">menyimpan jenis laporan yang diperbarui</string>
-    <string name="announce_instruction_sheet_jenis_laporan">Pilih Jenis Laporan</string>
+    <string name="announce_instruction_sheet_jenis_laporan">Opsi Pilihan Jenis Laporan</string>
     <string name="jenis_laporan_successfully_updated">jenis laporan kamu berhasil diperbarui</string>
+
+    <string name="option_private_desc">Laporan private atau rahasia hanya bisa diakses secara privat olehmu dan petugas yang menindaklajuti laporanmu. Tenang aja, laporanmu tidak akan terlihat oleh pengguna lain.</string>
+    <string name="option_private_desc_2">Pilih Privat/Rahasia, jika:</string>
+    <string name="option_private_desc_3">• Kamu ingin menjaga kerahasiaan dan privasi data dalam laporan yang kamu buat.</string>
+    <string name="cd_option_private">Pilih Private atau Rahasia, jika kamu ingin menjaga kerahasiaan dan privasi data dalam laporan yang kamu buat</string>
+
+    <string name="option_public_desc">Laporan publik akan ditampilkan di aplikasi JAKI dan dapat dilihat oleh siapapun. Pengguna lain juga bisa mendukung dan mengomentari laporanmu.</string>
+    <string name="option_public_desc_2">Pilih Publik, jika:</string>
+    <string name="option_public_desc_3">• Laporan bersifat umum dan ingin dibagikan ke masyarakat luas.\n• Laporan punya potensi untuk menginspirasi orang lain agar peduli hal yang sama.</string>
+    <string name="cd_option_public">Pilih Publik, jika aporan bersifat umum dan ingin dibagikan ke masyarakat luas dan laporan kamu punya potensi untuk menginspirasi orang lain agar peduli hal yang sama</string>
 
 </resources>

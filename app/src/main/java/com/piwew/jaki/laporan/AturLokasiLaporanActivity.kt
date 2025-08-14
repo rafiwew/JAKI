@@ -193,7 +193,9 @@ class AturLokasiLaporanActivity : AppCompatActivity(),
 
     private fun updateLocationUI(address: String) {
         binding.tvLokasi.text = address
+        binding.tvLokasi.contentDescription = getString(R.string.cd_location_report, address)
         binding.tvLokasiLaporan.text = address
+        binding.tvLokasiLaporan.contentDescription = getString(R.string.cd_location_report, address)
     }
 
     override fun onLocationSaved(editAddress: String) {

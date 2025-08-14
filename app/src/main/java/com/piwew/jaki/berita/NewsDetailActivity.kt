@@ -143,7 +143,6 @@ class NewsDetailActivity : AppCompatActivity() {
             with(binding) {
                 ivItemThumbnail.loadImage(it.thumbnailUrl)
                 tvItemTitle.text = it.title
-                tvItemTitle.setAsAccessibilityHeading()
                 tvItemPublished.text = it.publishedAt
                 tvItemContent.text = Html.fromHtml(it.content, Html.FROM_HTML_MODE_LEGACY)
                 tvItemContent.movementMethod = LinkMovementMethod.getInstance()
@@ -154,6 +153,14 @@ class NewsDetailActivity : AppCompatActivity() {
 
                 ivItemThumbnail.contentDescription = getString(R.string.thumbnail_label, it.title)
                 ibShare.contentDescription = getString(R.string.share_news, it.title)
+                ibShare.setOnClickListener {
+                    val shareIntent = Intent().apply {
+                        action = Intent.ACTION_SEND
+                        putExtra(Intent.EXTRA_TEXT, binding.tvItemTitle.text)
+                        type = "text/plain"
+                    }
+                    startActivity(Intent.createChooser(shareIntent, getString(R.string.share_news)))
+                }
 
                 tvItemLikes.importantForAccessibility = View.IMPORTANT_FOR_ACCESSIBILITY_YES
                 tvItemLikes.accessibilityLiveRegion = View.ACCESSIBILITY_LIVE_REGION_POLITE
@@ -259,6 +266,7 @@ class NewsDetailActivity : AppCompatActivity() {
     }
 
     private fun setupAccessibilityDelegates() {
+        binding.tvItemTitle.setAsAccessibilityHeading()
         binding.ibLink.setAsAccessibilityCustomActionLabel(getString(R.string.announce_action_copy))
 
         listOf(

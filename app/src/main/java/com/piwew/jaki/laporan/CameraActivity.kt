@@ -29,6 +29,7 @@ import com.piwew.jaki.R
 import com.piwew.jaki.databinding.ActivityCameraBinding
 import com.piwew.jaki.model.LaporanData
 import com.piwew.jaki.utils.createCustomTempFile
+import com.piwew.jaki.utils.setAccessibilityAsButton
 import com.piwew.jaki.utils.setAsAccessibilityHeading
 import com.piwew.jaki.utils.setAsAccessibilityRoleButton
 
@@ -52,15 +53,14 @@ class CameraActivity : AppCompatActivity() {
         setEdgeToEdgeInsets()
         setupAccessibilityDelegates()
         setupClickListeners()
-        // requestLocationPermissionIfNeeded()
     }
 
     private fun setupAccessibilityDelegates() {
         binding.ivActionBack.setAsAccessibilityRoleButton()
-        binding.switchCamera.setAsAccessibilityRoleButton()
-        binding.btnGallery.setAsAccessibilityRoleButton()
-        binding.btnCaptureImage.setAsAccessibilityRoleButton()
         binding.tvTitlePage.setAsAccessibilityHeading()
+        binding.switchCamera.setAccessibilityAsButton(getString(R.string.switch_camera))
+        binding.btnGallery.setAccessibilityAsButton(getString(R.string.open_gallery))
+        binding.btnCaptureImage.setAccessibilityAsButton(getString(R.string.capture_image))
 
         ViewCompat.addAccessibilityAction(
             binding.root,

@@ -2,7 +2,7 @@ package com.piwew.jaki.berita
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.SearchView
+import androidx.appcompat.widget.SearchView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -48,6 +48,12 @@ class SearchNewsActivity : AppCompatActivity() {
         setUpRecyclerView()
         getNewsData()
         setupSearchView()
+
+        binding.searchViewNews.post {
+            binding.searchViewNews.setIconifiedByDefault(false)
+            binding.searchViewNews.isIconified = true
+            binding.searchViewNews.queryHint = getString(R.string.hint_search_news)
+        }
     }
 
     private fun getNewsData() {

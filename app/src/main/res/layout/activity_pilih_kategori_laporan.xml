@@ -11,9 +11,10 @@
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
+        android:layout_height="wrap_content"
         android:background="@color/white"
         android:gravity="center"
+        android:minHeight="?attr/actionBarSize"
         android:paddingStart="20dp"
         android:paddingEnd="20dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -55,7 +56,7 @@
             android:textSize="14sp" />
     </androidx.appcompat.widget.Toolbar>
 
-    <SearchView
+    <com.piwew.jaki.utils.CustomSearchView
         android:id="@+id/search_view_category"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -65,10 +66,12 @@
         android:clickable="true"
         android:focusable="true"
         android:iconifiedByDefault="false"
+        android:minHeight="50dp"
         android:queryHint="@string/hint_search_category"
+        android:theme="@style/CustomSearchViewStyle"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar" />
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/live_region_announcement"
@@ -90,7 +93,7 @@
         android:layout_marginTop="16dp"
         android:fontFamily="@font/plus_jakarta_sans_bold"
         android:text="@string/rekomendasi_kategori"
-        android:textColor="#5182A2"
+        android:textColor="#316C92"
         android:textSize="14sp"
         app:layout_constraintTop_toBottomOf="@id/search_view_category" />
 
@@ -113,7 +116,7 @@
         android:layout_marginTop="16dp"
         android:fontFamily="@font/plus_jakarta_sans_bold"
         android:text="@string/semua_kategori"
-        android:textColor="#5182A2"
+        android:textColor="#316C92"
         android:textSize="14sp"
         app:layout_constraintTop_toBottomOf="@id/chip_category" />
 

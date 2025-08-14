@@ -19,7 +19,7 @@ import com.piwew.jaki.R
 import com.piwew.jaki.berita.NewsDetailActivity.Companion.EXTRA_DATA
 import com.piwew.jaki.databinding.ActivityNewsBinding
 import com.piwew.jaki.model.News
-import com.piwew.jaki.ui.NewsAdapter
+import com.piwew.jaki.ui.NewsMainAdapter
 import com.piwew.jaki.utils.setAccessibilityAsButton
 import com.piwew.jaki.utils.setAsAccessibilityHeading
 import com.piwew.jaki.utils.setAsAccessibilityRoleButton
@@ -27,7 +27,7 @@ import com.piwew.jaki.utils.setAsAccessibilityRoleButton
 class NewsActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityNewsBinding
-    private val newsMainAdapter = NewsAdapter()
+    private val newsMainAdapter = NewsMainAdapter()
     private val databaseReference: DatabaseReference by lazy {
         FirebaseDatabase.getInstance().getReference("News")
     }

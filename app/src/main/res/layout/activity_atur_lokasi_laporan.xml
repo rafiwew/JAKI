@@ -11,9 +11,10 @@
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
+        android:layout_height="wrap_content"
         android:background="@color/white"
         android:gravity="center"
+        android:minHeight="?attr/actionBarSize"
         android:paddingStart="20dp"
         android:paddingEnd="20dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -102,12 +103,13 @@
                         android:id="@+id/btn_ganti_foto"
                         style="@style/Button"
                         android:layout_width="wrap_content"
-                        android:layout_height="48dp"
+                        android:layout_height="wrap_content"
                         android:layout_gravity="bottom|end"
                         android:layout_margin="16dp"
                         android:contentDescription="@string/ganti_foto"
                         android:elevation="4dp"
                         android:gravity="center"
+                        android:minHeight="48dp"
                         android:text="@string/text_ganti_foto"
                         android:textAllCaps="false"
                         android:textColor="#1C5DDB"
@@ -125,6 +127,7 @@
                     android:layout_marginTop="16dp"
                     android:layout_marginBottom="0dp"
                     android:fontFamily="@font/plus_jakarta_sans_medium"
+                    android:importantForAccessibility="no"
                     android:text="@string/lokasi_laporan"
                     android:textSize="14sp" />
 
@@ -276,19 +279,21 @@
                     android:scrollbarStyle="insideInset"
                     android:scrollbars="vertical"
                     android:scrollHorizontally="false"
+                    android:textColor="@color/black"
                     android:textSize="16sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <Button
                 android:id="@+id/btn_next_to_tulis_detail_laporan"
                 android:layout_width="match_parent"
-                android:layout_height="55dp"
+                android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="50dp"
                 android:background="@drawable/bg_text_input"
                 android:fontFamily="@font/plus_jakarta_sans_bold"
+                android:minHeight="55dp"
                 android:text="@string/next"
                 android:textSize="16sp" />
         </LinearLayout>
